@@ -34,7 +34,7 @@
             <input type="time" name="jamPulang" id="jamPulang" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-success">Simpan</button>
-        <a href="{{ route('shifts.index') }}" class="btn btn-secondary">Batal</a>
+            <a href="{{ route('shifts.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

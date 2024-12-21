@@ -11,12 +11,16 @@ class cashdrawer extends Model
 
     protected $table = 'cash_drawer';
 
+    public $timestamps = false;
+
     protected $fillable = [
-        'idstaff', 'tglBuka', 'tglTutup', 'saldoAwal', 'saldoAkhir'
+        'idshift', 'jamBuka', 'jamTutup', 'saldoAwal', 'saldoAkhir'
     ];
 
-    public function staff()
+    // Relasi ke model Shift
+    public function shift()
     {
-        return $this->belongsTo(staff::class, 'idstaff');
+        return $this->belongsTo(Shift::class, 'idshift');
     }
 }
+

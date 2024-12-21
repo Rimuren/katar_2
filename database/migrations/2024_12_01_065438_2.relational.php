@@ -61,14 +61,14 @@ return new class extends Migration
         // Tabel cash_Drawer
         Schema::create('cash_drawer', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idstaff');
-            $table->date('tglBuka');
-            $table->date('tglTutup');
+            $table->unsignedBigInteger('idshift');
+            $table->time('jamBuka');
+            $table->time('jamTutup');
             $table->integer('saldoAwal');
-            $table->integer('saldoAkhir');
-
-            $table->foreign('idstaff')->references('id')->on('staff')->onDelete('cascade');
+            $table->integer('saldoAkhir')->nullable();
+            $table->foreign('idshift')->references('id')->on('shift')->onDelete('cascade');
         });
+        
 
         // Tabel transaksi
         Schema::create('transaksi', function (Blueprint $table) {

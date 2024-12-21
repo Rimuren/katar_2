@@ -52,7 +52,7 @@
                                 Tidak ada data barang yang tersedia.
                             </div>
                         @endif
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>

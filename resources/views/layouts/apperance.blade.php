@@ -102,6 +102,7 @@
                 <li><a href="{{ url('/merks') }}" class="nav-link">Merk</a></li>
                 <li><a href="{{ url('/kategoris') }}" class="nav-link">Kategori</a></li>
                 <li><a href="{{ url('/suppliers') }}" class="nav-link">Supplier</a></li>
+                <li><a href="{{ url('/cashdrawers') }}" class="nav-link">cashdrawer</a>
             </ul>
         </div>
     </div>

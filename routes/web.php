@@ -8,6 +8,7 @@ use App\Http\Controllers\pelangganController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\CashDrawerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,6 +39,9 @@ Route::resource('staffs', StaffController::class);
 
 // CRUD shift
 Route::resource('shifts', ShiftController::class);
+
+// CRUD cashdrawer
+Route::resource('cashdrawers', CashdrawerController::class);
 
 
 
