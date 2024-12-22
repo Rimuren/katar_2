@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class opname extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $table = 'opname';
 
     protected $fillable = [

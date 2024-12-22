@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idmerk');
             $table->unsignedBigInteger('idkategori');
             $table->string('namaBarang');
-            $table->integer('stok');
+            $table->integer('stok')->nullable();
             $table->decimal('hargaBeli', 15, 2);
             $table->decimal('hargaJual', 15, 2);
 
@@ -31,8 +31,8 @@ return new class extends Migration
             $table->unsignedBigInteger('idbarang');
             $table->unsignedBigInteger('idstaff');
             $table->date('tglOpname');
-            $table->integer('stokFisik');
-            $table->integer('stokSistem');
+            $table->integer('stokFisik')->nullable();
+            $table->integer('stokSistem')->nullable();
             $table->integer('selisih')->nullable();
 
             $table->foreign('idbarang')->references('id')->on('barang')->onDelete('cascade');

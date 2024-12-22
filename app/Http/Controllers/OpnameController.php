@@ -2,92 +2,117 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Opname;
+use App\Models\Barang;
+use App\Models\Staff;
+use Illuminate\Http\Request;
 
 class OpnameController extends Controller
 {
-    // Menampilkan daftar opname
+    // Menampilkan daftar opname dengan relasi barang dan staff
     public function index()
     {
-        $opnames = Opname::with(['barang', 'staff'])->get();
-        return response()->json($opnames);
+        // Ambil semua data opname dengan relasi barang dan staff
+        $opnames = Opname::with('barang', 'staff')->get();
+
+        return view('opnames.index', compact('opnames'));
     }
 
-    // Menampilkan detail opname tertentu
-    public function show($id)
+    // Menampilkan form untuk menambahkan opname baru
+    public function create()
     {
-        $opname = Opname::with(['barang', 'staff'])->find($id);
-
-        if (!$opname) {
-            return response()->json(['message' => 'Data tidak ditemukan'], 404);
-        }
-
-        return response()->json($opname);
+        // Ambil daftar barang dan staff untuk dropdown
+        $barangs = Barang::all();
+        $staffs = Staff::all();
+        return view('opnames.create', compact('barangs', 'staffs'));
     }
 
-    // Menambahkan data opname baru
+    // Menyimpan opname baru
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
-            'idBarang' => 'required|exists:barangs,idBarang',
-            'idStaff' => 'required|exists:staffs,idStaff',
+            'idbarang' => 'required|exists:barang,id',
+            'idstaff' => 'required|exists:staff,id',
             'tglOpname' => 'required|date',
-            'stokFisik' => 'required|integer',
-            'stokSistem' => 'required|integer'
+            'stokFisik' => 'required|numeric',
+            'stokSistem' => 'nullable|numeric',
+            'selisih' => 'nullable|numeric',
         ]);
 
-        $selisih = $request->stokFisik - $request->stokSistem;
+        // Ambil data barang untuk stokSistem
+        $barang = Barang::find($request->idbarang);
+        $stokSistem = $barang->stok;
 
-        $opname = Opname::create([
-            'idBarang' => $request->idBarang,
-            'idStaff' => $request->idStaff,
+        // Hitung selisih stok (stokFisik - stokSistem)
+        $selisih = $request->stokFisik - $stokSistem;
+
+        // Simpan data opname dengan selisih yang dihitung
+        Opname::create([
+            'idbarang' => $request->idbarang,
+            'idstaff' => $request->idstaff,
             'tglOpname' => $request->tglOpname,
             'stokFisik' => $request->stokFisik,
-            'stokSistem' => $request->stokSistem,
-            'selisih' => $selisih
+            'stokSistem' => $stokSistem,
+            'selisih' => $selisih, // Simpan nilai selisih
         ]);
 
-        return response()->json($opname, 201);
+        return redirect()->route('opnames.index')->with('success', 'Opname berhasil disimpan');
     }
 
-    // Memperbarui data opname
+    // Menampilkan form untuk mengedit opname
+    public function edit($id)
+    {
+        // Ambil data opname berdasarkan ID
+        $opname = Opname::findOrFail($id);
+        $barangs = Barang::all();
+        $staffs = Staff::all();
+        return view('opnames.edit', compact('opname', 'barangs', 'staffs'));
+    }
+
+    // Mengupdate opname yang sudah ada
     public function update(Request $request, $id)
     {
-        $opname = Opname::find($id);
-
-        if (!$opname) {
-            return response()->json(['message' => 'Data tidak ditemukan'], 404);
-        }
-
+        // Validasi input
         $request->validate([
-            'idBarang' => 'exists:barangs,idBarang',
-            'idStaff' => 'exists:staffs,idStaff',
-            'tglOpname' => 'date',
-            'stokFisik' => 'integer',
-            'stokSistem' => 'integer'
+            'idbarang' => 'required|exists:barang,id',
+            'idstaff' => 'required|exists:staff,id',
+            'tglOpname' => 'required|date',
+            'stokFisik' => 'required|numeric',
+            'stokSistem' => 'nullable|numeric',
+            'selisih' => 'nullable|numeric',
         ]);
 
-        if ($request->has('stokFisik') && $request->has('stokSistem')) {
-            $request['selisih'] = $request->stokFisik - $request->stokSistem;
-        }
+        // Ambil data opname berdasarkan ID
+        $opname = Opname::findOrFail($id);
 
-        $opname->update($request->all());
+        // Ambil data barang untuk stokSistem
+        $barang = Barang::find($request->idbarang);
+        $stokSistem = $barang->stok;
 
-        return response()->json($opname);
+        // Hitung selisih stok (stokFisik - stokSistem)
+        $selisih = $request->stokFisik - $stokSistem;
+
+        // Update data opname dengan selisih yang dihitung
+        $opname->update([
+            'idbarang' => $request->idbarang,
+            'idstaff' => $request->idstaff,
+            'tglOpname' => $request->tglOpname,
+            'stokFisik' => $request->stokFisik,
+            'stokSistem' => $stokSistem,
+            'selisih' => $selisih, // Simpan nilai selisih
+        ]);
+
+        return redirect()->route('opnames.index')->with('success', 'Opname berhasil diperbarui');
     }
 
-    // Menghapus data opname
+    // Menghapus opname
     public function destroy($id)
     {
-        $opname = Opname::find($id);
-
-        if (!$opname) {
-            return response()->json(['message' => 'Data tidak ditemukan'], 404);
-        }
-
+        // Cari dan hapus data opname
+        $opname = Opname::findOrFail($id);
         $opname->delete();
 
-        return response()->json(['message' => 'Data berhasil dihapus']);
+        return redirect()->route('opnames.index')->with('success', 'Opname berhasil dihapus');
     }
 }
