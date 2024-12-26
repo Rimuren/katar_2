@@ -7,14 +7,12 @@ use App\Models\Pembelian;
 
 class PembelianController extends Controller
 {
-    // Menampilkan daftar pembelian
     public function index()
     {
         $pembelian = Pembelian::with(['barang', 'supplier', 'transaksi'])->get();
         return response()->json($pembelian);
     }
 
-    // Menampilkan detail pembelian tertentu
     public function show($id)
     {
         $pembelian = Pembelian::with(['barang', 'supplier', 'transaksi'])->find($id);
@@ -26,7 +24,6 @@ class PembelianController extends Controller
         return response()->json($pembelian);
     }
 
-    // Menambahkan data pembelian baru
     public function store(Request $request)
     {
         $request->validate([
@@ -48,7 +45,6 @@ class PembelianController extends Controller
         return response()->json($pembelian, 201);
     }
 
-    // Memperbarui data pembelian
     public function update(Request $request, $id)
     {
         $pembelian = Pembelian::find($id);
@@ -70,7 +66,6 @@ class PembelianController extends Controller
         return response()->json($pembelian);
     }
 
-    // Menghapus data pembelian
     public function destroy($id)
     {
         $pembelian = Pembelian::find($id);

@@ -7,20 +7,18 @@ use Illuminate\Http\Request;
 
 class StaffController extends Controller
 {
-    // Menampilkan staff
+
     public function index()
     {
         $staffs = staff::all(); 
         return view('staffs.index', compact('staffs')); 
     }
 
-    // Menampilkan form staff
     public function create()
     {
         return view('staffs.create'); 
     }
 
-    // Simpan
     public function store(Request $request)
     {
         $request->validate([
@@ -35,21 +33,18 @@ class StaffController extends Controller
         return redirect()->route('staffs.index')->with('success', 'Staff berhasil ditambahkan.');
     }
 
-    // Menampilkan id
     public function show($id)
     {
         $staff = staff::findOrFail($id); 
         return view('staffs.show', compact('staff'));
     }
 
-    // Edit
     public function edit($id)
     {
         $staff = staff::findOrFail($id); 
         return view('staffs.edit', compact('staff')); 
     }
 
-    // Update
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -65,7 +60,6 @@ class StaffController extends Controller
         return redirect()->route('staffs.index')->with('success', 'Staff berhasil diperbarui.');
     }
 
-        // Hapus
     public function destroy($id)
     {
         $staff = staff::findOrFail($id); 

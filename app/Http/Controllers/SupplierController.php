@@ -12,7 +12,6 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        // Ambil semua data supplier dari database
         $suppliers = Supplier::all();
         return view('suppliers.index', compact('suppliers'));
     }
@@ -22,7 +21,6 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        // Tampilkan form untuk menambah supplier baru
         return view('suppliers.create');
     }
 
@@ -31,14 +29,12 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi input dari form
         $request->validate([
             'namaSupplier' => 'required|string|max:255',
             'noTlp' => 'required|string|max:15',
             'email' => 'required|email|unique:supplier,email',
         ]);
 
-        // Simpan data ke database
         Supplier::create($request->all());
 
         return redirect()->route('suppliers.index')->with('success', 'Supplier berhasil ditambahkan.');
@@ -49,7 +45,6 @@ class SupplierController extends Controller
      */
     public function show(Supplier $supplier)
     {
-        // Tampilkan detail dari supplier
         return view('suppliers.show', compact('supplier'));
     }
 
@@ -58,7 +53,6 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        // Tampilkan form untuk mengedit supplier
         return view('suppliers.edit', compact('supplier'));
     }
 
@@ -67,14 +61,12 @@ class SupplierController extends Controller
      */
     public function update(Request $request, Supplier $supplier)
     {
-        // Validasi input dari form
         $request->validate([
             'namaSupplier' => 'required|string|max:255',
             'noTlp' => 'required|string|max:15',
             'email' => 'required|email|unique:supplier,email,' . $supplier->id,
         ]);
 
-        // Update data di database
         $supplier->update($request->all());
 
         return redirect()->route('suppliers.index')->with('success', 'Supplier berhasil diperbarui.');
@@ -85,7 +77,6 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        // Hapus data supplier dari database
         $supplier->delete();
 
         return redirect()->route('suppliers.index')->with('success', 'Supplier berhasil dihapus.');

@@ -7,14 +7,12 @@ use App\Models\Penjualan;
 
 class PenjualanController extends Controller
 {
-    // Menampilkan daftar penjualan
     public function index()
     {
         $penjualan = Penjualan::with(['barang', 'transaksi'])->get();
         return response()->json($penjualan);
     }
 
-    // Menampilkan detail penjualan tertentu
     public function show($id)
     {
         $penjualan = Penjualan::with(['barang', 'transaksi'])->find($id);
@@ -26,7 +24,6 @@ class PenjualanController extends Controller
         return response()->json($penjualan);
     }
 
-    // Menambahkan data penjualan baru
     public function store(Request $request)
     {
         $request->validate([
@@ -46,7 +43,6 @@ class PenjualanController extends Controller
         return response()->json($penjualan, 201);
     }
 
-    // Memperbarui data penjualan
     public function update(Request $request, $id)
     {
         $penjualan = Penjualan::find($id);
@@ -67,7 +63,6 @@ class PenjualanController extends Controller
         return response()->json($penjualan);
     }
 
-    // Menghapus data penjualan
     public function destroy($id)
     {
         $penjualan = Penjualan::find($id);

@@ -19,7 +19,6 @@ Route::get('/', function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-// index,create,store,show,edit,update,destroy
 //CRUD supplier
 Route::resource('suppliers', SupplierController::class);
 

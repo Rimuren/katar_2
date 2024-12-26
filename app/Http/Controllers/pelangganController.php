@@ -7,20 +7,17 @@ use Illuminate\Http\Request;
 
 class PelangganController extends Controller
 {
-    // daftar pelanggan
     public function index()
     {
         $pelanggans = pelanggan::all(); 
         return view('pelanggans.index', compact('pelanggans'));
     }
 
-    // form pelanggan baru
     public function create()
     {
         return view('pelanggans.create');
     }
 
-    // Simpan 
     public function store(Request $request)
     {
         $request->validate([
@@ -42,14 +39,12 @@ class PelangganController extends Controller
         return view('pelanggans.show', compact('pelanggan'));
     }
 
-    // Edit
     public function edit($id)
     {
         $pelanggan = pelanggan::findOrFail($id);
         return view('pelanggans.edit', compact('pelanggan'));
     }
 
-    // Update
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -65,7 +60,6 @@ class PelangganController extends Controller
         return redirect()->route('pelanggans.index')->with('success', 'Pelanggan berhasil diperbarui.');
     }
 
-    // Hapus
     public function destroy($id)
     {
         $pelanggan = pelanggan::findOrFail($id);

@@ -7,14 +7,12 @@ use App\Models\Penukaran;
 
 class PenukaranController extends Controller
 {
-    // Menampilkan daftar penukaran
     public function index()
     {
         $penukaran = Penukaran::with(['transaksi', 'shop'])->get();
         return response()->json($penukaran);
     }
 
-    // Menampilkan detail penukaran tertentu
     public function show($id)
     {
         $penukaran = Penukaran::with(['transaksi', 'shop'])->find($id);
@@ -26,7 +24,6 @@ class PenukaranController extends Controller
         return response()->json($penukaran);
     }
 
-    // Menambahkan data penukaran baru
     public function store(Request $request)
     {
         $request->validate([
@@ -46,7 +43,6 @@ class PenukaranController extends Controller
         return response()->json($penukaran, 201);
     }
 
-    // Memperbarui data penukaran
     public function update(Request $request, $id)
     {
         $penukaran = Penukaran::find($id);
@@ -67,7 +63,6 @@ class PenukaranController extends Controller
         return response()->json($penukaran);
     }
 
-    // Menghapus data penukaran
     public function destroy($id)
     {
         $penukaran = Penukaran::find($id);
