@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 
 class barang extends Model
 {
@@ -18,26 +19,38 @@ class barang extends Model
 
     public function merk()
     {
-        return $this->belongsTo(merk::class, 'idmerk');
+        return $this->belongsTo(Merk::class, 'idmerk');
     }
 
     public function kategori()
     {
-        return $this->belongsTo(kategori::class, 'idkategori');
+        return $this->belongsTo(Kategori::class, 'idkategori');
     }
 
     public function pembelian()
     {
-        return $this->hasMany(pembelian::class);
+        return $this->hasMany(Pembelian::class);
     }
 
     public function penjualan()
     {
-        return $this->hasMany(penjualan::class);
+        return $this->hasMany(Penjualan::class);
     }
 
     public function opname()
     {
-        return $this->hasMany(opname::class);
+        return $this->hasMany(Opname::class);
+    }
+
+    public static function validateData($data)
+    {
+        return Validator::make($data, [
+            'namaBarang' => 'required|string|max:255',
+            'stok' => 'required|integer|min:0',
+            'hargaBeli' => 'required|numeric|min:0',
+            'hargaJual' => 'required|numeric|min:0',
+            'idkategori' => 'required|exists:kategori,id',
+            'idmerk' => 'required|exists:merk,id',
+        ])->validate();
     }
 }
