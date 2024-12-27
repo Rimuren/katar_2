@@ -14,6 +14,7 @@
                             <div class="form-group">
                                 <label for="idbarang">Barang</label>
                                 <select name="idbarang" class="form-control" required>
+                                    <option value="" disabled selected>Pilih Barang</option>
                                     @foreach ($barangs as $barang)
                                         <option value="{{ $barang->id }}">{{ $barang->namaBarang }}</option>
                                     @endforeach
@@ -22,6 +23,7 @@
                             <div class="form-group">
                                 <label for="idstaff">Staff</label>
                                 <select name="idstaff" class="form-control" required>
+                                    <option value="" disabled selected>Pilih Staff</option>
                                     @foreach ($staffs as $staff)
                                         <option value="{{ $staff->id }}">{{ $staff->namaStaff }}</option>
                                     @endforeach

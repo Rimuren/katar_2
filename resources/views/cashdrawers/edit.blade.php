@@ -17,6 +17,7 @@
                             <div class="form-group mb-3">
                                 <label for="idstaff">Staff</label>
                                 <select name="idstaff" id="idstaff" class="form-select" required>
+                                        <option value="" disabled selected>Pilih Staff</option>
                                     @foreach ($staffs as $staff)
                                         <option value="{{ $staff->id }}" {{ $cashdrawer->idstaff == $staff->id ? 'selected' : '' }}>
                                             {{ $staff->namaStaff }}
@@ -24,17 +25,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
-                            <!-- <div class="form-group mb-3">
-                                <label for="jamBuka">Jam Buka</label>
-                                <input type="time" name="jamBuka" id="jamBuka" class="form-control" value="{{ $cashdrawer->jamBuka }}" required>
-                            </div>
-
-                            <div class="form-group mb-3">
-                                <label for="jamTutup">Jam Tutup</label>
-                                <input type="time" name="jamTutup" id="jamTutup" class="form-control" value="{{ $cashdrawer->jamTutup }}" required>
-                            </div> -->
-
                             <div class="form-group mb-3">
                                 <label for="saldoAwal">Saldo Awal</label>
                                 <input type="number" name="saldoAwal" id="saldoAwal" class="form-control" value="{{ $cashdrawer->saldoAwal }}" required>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\CashDrawer;
-use App\Models\Shift;
 use App\Models\Staff;
 use Illuminate\Http\Request;
 
@@ -12,10 +11,9 @@ class CashDrawerController extends Controller
     public function index()
     {
         $cashdrawers = CashDrawer::with('shift.staff')->get();
-
         return view('cashdrawers.index', compact('cashdrawers'));
     }
-    
+
     public function create()
     {
         $staffs = Staff::all();
@@ -24,27 +22,13 @@ class CashDrawerController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'idstaff' => 'required|exists:staff,id',
-            'saldoAwal' => 'required|integer',
-            'saldoAkhir' => 'nullable|integer',
-        ]);
+        $result = CashDrawer::createCashDrawer($request->all());
 
-        $shift = Shift::where('idstaff', $request->idstaff)->first();
-
-        if (!$shift) {
-            return redirect()->back()->withErrors(['idstaff' => 'Staff ini belum memiliki shift.']);
+        if (isset($result['errors'])) {
+            return redirect()->back()->withErrors($result['errors'])->withInput();
         }
 
-        CashDrawer::create([
-            'idshift' => $shift->id,
-            'jamBuka' => $shift->jamKerja,
-            'jamTutup' => $shift->jamPulang,
-            'saldoAwal' => $request->saldoAwal,
-            'saldoAkhir' => $request->saldoAkhir,
-        ]);
-
-        return redirect()->route('cashdrawers.index')->with('success', 'Cash Drawer berhasil ditambahkan.');
+        return redirect()->route('cashdrawers.index')->with('success', $result['success']);
     }
 
     public function edit($id)
@@ -57,28 +41,13 @@ class CashDrawerController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'idstaff' => 'required|exists:staff,id',
-            'saldoAwal' => 'required|integer',
-            'saldoAkhir' => 'nullable|integer',
-        ]);
+        $result = CashDrawer::updateCashDrawer($id, $request->all());
 
-        $shift = Shift::where('idstaff', $request->idstaff)->first();
-
-        if (!$shift) {
-            return redirect()->back()->withErrors(['idstaff' => 'Staff ini belum memiliki shift.']);
+        if (isset($result['errors'])) {
+            return redirect()->back()->withErrors($result['errors'])->withInput();
         }
 
-        $cashdrawer = CashDrawer::findOrFail($id);
-        $cashdrawer->update([
-            'idshift' => $shift->id,
-            'jamBuka' => $shift->jamKerja,
-            'jamTutup' => $shift->jamPulang,
-            'saldoAwal' => $request->saldoAwal,
-            'saldoAkhir' => $request->saldoAkhir,
-        ]);
-
-        return redirect()->route('cashdrawers.index')->with('success', 'Cash Drawer berhasil diperbarui.');
+        return redirect()->route('cashdrawers.index')->with('success', $result['success']);
     }
 
     public function destroy($id)

@@ -24,8 +24,9 @@ class BarangController extends Controller
 
     public function store(Request $request)
     {
-        Barang::validateData($request->all());
-        Barang::create($request->all());
+        // Memanggil model untuk membuat barang
+        Barang::createBarang($request->all());
+
         return redirect()->route('barangs.index')->with('success', 'Barang berhasil ditambahkan.');
     }
     
@@ -39,9 +40,9 @@ class BarangController extends Controller
 
     public function update(Request $request, $id)
     {
-        $barang = Barang::findOrFail($id);
-        Barang::validateData($request->all());
-        $barang->update($request->all());
+        // Memanggil model untuk memperbarui barang
+        Barang::updateBarang($id, $request->all());
+
         return redirect()->route('barangs.index')->with('success', 'Barang berhasil diperbarui.');
     }
 

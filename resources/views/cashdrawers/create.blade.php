@@ -21,7 +21,7 @@
             <div class="form-group mb-3">
                 <label for="idstaff">Staff</label>
                 <select name="idstaff" id="idstaff" class="form-select" required>
-                    <option value="">Pilih Staff</option>
+                    <option value="" disabled selected>Pilih Staff</option>
                     @foreach ($staffs as $staff)
                         <option value="{{ $staff->id }}">{{ $staff->namaStaff }}</option>
                     @endforeach

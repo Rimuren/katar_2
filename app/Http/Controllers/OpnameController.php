@@ -11,46 +11,35 @@ class OpnameController extends Controller
 {
     public function index()
     {
+        // Mengambil semua data opname dengan relasi barang dan staff
         $opnames = Opname::with('barang', 'staff')->get();
-
         return view('opnames.index', compact('opnames'));
     }
 
     public function create()
     {
+        // Mengambil semua data barang dan staff
         $barangs = Barang::all();
         $staffs = Staff::all();
         return view('opnames.create', compact('barangs', 'staffs'));
     }
+
     public function store(Request $request)
     {
-        $request->validate([
-            'idbarang' => 'required|exists:barang,id',
-            'idstaff' => 'required|exists:staff,id',
-            'tglOpname' => 'required|date',
-            'stokFisik' => 'required|numeric',
-            'stokSistem' => 'nullable|numeric',
-            'selisih' => 'nullable|numeric',
-        ]);
-        $barang = Barang::find($request->idbarang);
-        $stokSistem = $barang->stok;
+        // Menyimpan data opname menggunakan model
+        $result = Opname::createOpname($request->all());
 
-        $selisih = $request->stokFisik - $stokSistem;
+        // Mengirimkan respon berdasarkan hasil dari model
+        if (isset($result['errors'])) {
+            return redirect()->back()->withErrors($result['errors'])->withInput();
+        }
 
-        Opname::create([
-            'idbarang' => $request->idbarang,
-            'idstaff' => $request->idstaff,
-            'tglOpname' => $request->tglOpname,
-            'stokFisik' => $request->stokFisik,
-            'stokSistem' => $stokSistem,
-            'selisih' => $selisih,
-        ]);
-
-        return redirect()->route('opnames.index')->with('success', 'Opname berhasil disimpan');
+        return redirect()->route('opnames.index')->with('success', $result['success']);
     }
 
     public function edit($id)
     {
+        // Mengambil data opname untuk diedit, dan data barang serta staff
         $opname = Opname::findOrFail($id);
         $barangs = Barang::all();
         $staffs = Staff::all();
@@ -59,32 +48,15 @@ class OpnameController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'idbarang' => 'required|exists:barang,id',
-            'idstaff' => 'required|exists:staff,id',
-            'tglOpname' => 'required|date',
-            'stokFisik' => 'required|numeric',
-            'stokSistem' => 'nullable|numeric',
-            'selisih' => 'nullable|numeric',
-        ]);
+        // Memperbarui data opname menggunakan model
+        $result = Opname::updateOpname($id, $request->all());
 
-        $opname = Opname::findOrFail($id);
+        // Mengirimkan respon berdasarkan hasil dari model
+        if (isset($result['errors'])) {
+            return redirect()->back()->withErrors($result['errors'])->withInput();
+        }
 
-        $barang = Barang::find($request->idbarang);
-        $stokSistem = $barang->stok;
-
-        $selisih = $request->stokFisik - $stokSistem;
-
-        $opname->update([
-            'idbarang' => $request->idbarang,
-            'idstaff' => $request->idstaff,
-            'tglOpname' => $request->tglOpname,
-            'stokFisik' => $request->stokFisik,
-            'stokSistem' => $stokSistem,
-            'selisih' => $selisih
-        ]);
-
-        return redirect()->route('opnames.index')->with('success', 'Opname berhasil diperbarui');
+        return redirect()->route('opnames.index')->with('success', $result['success']);
     }
 
     public function destroy($id)

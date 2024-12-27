@@ -42,6 +42,7 @@ class barang extends Model
         return $this->hasMany(Opname::class);
     }
 
+    // Fungsi untuk validasi data
     public static function validateData($data)
     {
         return Validator::make($data, [
@@ -52,5 +53,28 @@ class barang extends Model
             'idkategori' => 'required|exists:kategori,id',
             'idmerk' => 'required|exists:merk,id',
         ])->validate();
+    }
+
+    // Fungsi untuk menyimpan barang
+    public static function createBarang($data)
+    {
+        // Validasi data
+        self::validateData($data);
+
+        // Menyimpan barang
+        return self::create($data);
+    }
+
+    // Fungsi untuk memperbarui barang
+    public static function updateBarang($id, $data)
+    {
+        // Validasi data
+        self::validateData($data);
+
+        // Mencari barang dan memperbarui data
+        $barang = self::findOrFail($id);
+        $barang->update($data);
+
+        return $barang;
     }
 }

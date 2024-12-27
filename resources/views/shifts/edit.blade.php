@@ -20,6 +20,7 @@
         <div class="mb-3">
             <label for="idstaff" class="form-label">Nama Staff</label>
             <select name="idstaff" id="idstaff" class="form-select" required>
+                    <option value="" disabled selected>Pilih Staff</option>
                 @foreach ($staffs as $staff)
                     <option value="{{ $staff->id }}" {{ $shift->idstaff == $staff->id ? 'selected' : '' }}>
                         {{ $staff->namaStaff }}
