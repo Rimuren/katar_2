@@ -11,6 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        // Tabel Poin
+        Schema::create('poin', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('idPelanggan');
+            $table->integer('min_harga');
+            $table->integer('max_harga');
+            $table->integer('poin');
+            $table->timestamps();
+
+            $table->foreign('idPelanggan')->references('id')->on('pelanggan')->onDelete('cascade');
+        });
+
+        
         // Tabel barang
         Schema::create('barang', function (Blueprint $table) {
             $table->id();
@@ -130,6 +144,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('poin');
         Schema::dropIfExists('barang');
         Schema::dropIfExists('opname');
         Schema::dropIfExists('shop');

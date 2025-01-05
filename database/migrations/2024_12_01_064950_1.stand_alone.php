@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('namaPelanggan');
             $table->integer('noTlp')->unique();
             $table->string('email')->unique();
-            $table->integer('jumlahPoin');
             $table->timestamps();
         });
+        
+        
 
         // Tabel Supplier
         Schema::create('supplier', function (Blueprint $table) {
@@ -50,15 +51,7 @@ return new class extends Migration
         Schema::create('kategori', function (Blueprint $table) {
             $table->id();
             $table->string('namaKategori');
-        });
-
-        // Tabel Poin
-        Schema::create('poin', function (Blueprint $table) {
-            $table->id();
-            $table->integer('min_range');
-            $table->integer('max_range');
-            $table->integer('poin');
-        });
+        });     
     }
 
     /**
@@ -71,6 +64,5 @@ return new class extends Migration
         Schema::dropIfExists('staff');
         Schema::dropIfExists('merk');
         Schema::dropIfExists('kategori');
-        Schema::dropIfExists('poin');
     }
 };

@@ -142,6 +142,7 @@
                 <li><a href="{{ url('/suppliers') }}" class="nav-link"><i class="fas fa-truck"></i> Supplier</a></li>
                 <li><a href="{{ url('/cashdrawers') }}" class="nav-link"><i class="fas fa-cash-register"></i> Cashdrawer</a></li>
                 <li><a href="{{ url('/opnames') }}" class="nav-link"><i class="fas fa-search"></i> Opname</a></li>
+                <li><a href="{{ url('/pelanggans') }}" class="nav-link"><i class="fas fa-person"></i> Pelanggan</a></li>
             </ul>
         </div>
     </div>

@@ -43,14 +43,11 @@ class opname extends Model
             return ['errors' => $validator->errors()];
         }
 
-        // Mendapatkan stok sistem dari barang
         $barang = Barang::find($data['idbarang']);
         $stokSistem = $barang->stok;
 
-        // Menghitung selisih
         $selisih = $data['stokFisik'] - $stokSistem;
 
-        // Menyimpan data opname
         $opname = self::create([
             'idbarang' => $data['idbarang'],
             'idstaff' => $data['idstaff'],
@@ -62,8 +59,6 @@ class opname extends Model
 
         return ['success' => 'Opname berhasil disimpan.', 'data' => $opname];
     }
-
-    // Fungsi untuk update opname
     public static function updateOpname($id, $data)
     {
         $validator = Validator::make($data, [
@@ -79,11 +74,9 @@ class opname extends Model
             return ['errors' => $validator->errors()];
         }
 
-        // Mendapatkan stok sistem dari barang
         $barang = Barang::find($data['idbarang']);
         $stokSistem = $barang->stok;
 
-        // Menghitung selisih
         $selisih = $data['stokFisik'] - $stokSistem;
 
         $opname = self::findOrFail($id);
