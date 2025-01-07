@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
-class supplier extends Model
+class Supplier extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,6 @@ class supplier extends Model
         return $this->hasMany(Pembelian::class);
     }
 
-    // Fungsi untuk menyimpan data supplier
     public static function createSupplier($data)
     {
         $validator = Validator::make($data, [
@@ -34,13 +33,11 @@ class supplier extends Model
             return ['errors' => $validator->errors()];
         }
 
-        // Menyimpan data supplier
         $supplier = self::create($data);
 
         return ['success' => 'Supplier berhasil ditambahkan.', 'data' => $supplier];
     }
 
-    // Fungsi untuk memperbarui data supplier
     public static function updateSupplier($id, $data)
     {
         $validator = Validator::make($data, [

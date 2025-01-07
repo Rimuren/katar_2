@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
-class staff extends Model
+class Staff extends Model
 {
     use HasFactory;
 
@@ -17,25 +17,24 @@ class staff extends Model
         'namaStaff', 'sebagai', 'email', 'noTlp'
     ];
 
-    // Relasi
     public function transaksi()
     {
-        return $this->hasMany(transaksi::class);
+        return $this->hasMany(Transaksi::class);
     }
 
     public function shift()
     {
-        return $this->hasMany(shift::class);
+        return $this->hasMany(Shift::class);
     }
 
     public function cashDrawer()
     {
-        return $this->hasMany(cashdrawer::class);
+        return $this->hasMany(Cashdrawer::class);
     }
 
     public function opname()
     {
-        return $this->hasMany(opname::class);
+        return $this->hasMany(Opname::class);
     }
 
     // Logika untuk mendapatkan semua staff
@@ -68,13 +67,11 @@ class staff extends Model
         ];
     }
 
-    // Logika untuk mendapatkan staff berdasarkan ID
     public static function getStaff($id)
     {
         return self::findOrFail($id);
     }
 
-    // Logika untuk memperbarui staff
     public static function updateStaff($request, $id)
     {
         $staff = self::findOrFail($id);
@@ -100,7 +97,6 @@ class staff extends Model
         ];
     }
 
-    // Logika untuk menghapus staff
     public static function deleteStaff($id)
     {
         $staff = self::findOrFail($id);

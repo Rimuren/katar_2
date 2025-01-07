@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
-class barang extends Model
+class Barang extends Model
 {
     use HasFactory;
 
@@ -42,7 +42,6 @@ class barang extends Model
         return $this->hasMany(Opname::class);
     }
 
-    // Fungsi untuk validasi data
     public static function validateData($data)
     {
         return Validator::make($data, [
@@ -55,23 +54,15 @@ class barang extends Model
         ])->validate();
     }
 
-    // Fungsi untuk menyimpan barang
     public static function createBarang($data)
     {
-        // Validasi data
         self::validateData($data);
-
-        // Menyimpan barang
         return self::create($data);
     }
 
-    // Fungsi untuk memperbarui barang
     public static function updateBarang($id, $data)
     {
-        // Validasi data
         self::validateData($data);
-
-        // Mencari barang dan memperbarui data
         $barang = self::findOrFail($id);
         $barang->update($data);
 

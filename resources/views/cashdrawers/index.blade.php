@@ -12,7 +12,9 @@
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('cashdrawers.create') }}" class="btn btn-md btn-success mb-3">Tambah Cash Drawer</a>
+                        <a href="{{ route('cashdrawers.create') }}" class="btn btn-md btn-success mb-3">
+                            <i class="fas fa-plus-circle"></i> Tambah Cash Drawer
+                        </a>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -33,11 +35,15 @@
                                         <td>{{ number_format($cashdrawer->saldoAwal, 0, ',', '.') }}</td>
                                         <td>{{ number_format($cashdrawer->saldoAkhir, 0, ',', '.') }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('cashdrawers.edit', $cashdrawer->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="{{ route('cashdrawers.edit', $cashdrawer->id) }}" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
                                             <form action="{{ route('cashdrawers.destroy', $cashdrawer->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin?')">Hapus</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin?')">
+                                                    <i class="fas fa-trash"></i> Hapus
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

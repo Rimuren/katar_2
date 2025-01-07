@@ -24,7 +24,6 @@ class BarangController extends Controller
 
     public function store(Request $request)
     {
-        // Memanggil model untuk membuat barang
         Barang::createBarang($request->all());
 
         return redirect()->route('barangs.index')->with('success', 'Barang berhasil ditambahkan.');
@@ -40,7 +39,6 @@ class BarangController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Memanggil model untuk memperbarui barang
         Barang::updateBarang($id, $request->all());
 
         return redirect()->route('barangs.index')->with('success', 'Barang berhasil diperbarui.');

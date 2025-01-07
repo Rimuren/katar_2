@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
-class cashdrawer extends Model
+class Cashdrawer extends Model
 {
     use HasFactory;
 

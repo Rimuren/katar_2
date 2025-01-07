@@ -83,7 +83,6 @@ return new class extends Migration
             $table->foreign('idshift')->references('id')->on('shift')->onDelete('cascade');
         });
         
-
         // Tabel transaksi
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
@@ -93,7 +92,6 @@ return new class extends Migration
             $table->date('tglTransaksi');
             $table->integer('totalTransaksi');
             $table->enum('tipeTransaksi', ['beli', 'tukar']);
-
             $table->foreign('idPelanggan')->references('id')->on('pelanggan')->onDelete('cascade');
             $table->foreign('idStaff')->references('id')->on('staff')->onDelete('cascade');
         });

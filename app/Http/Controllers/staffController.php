@@ -9,7 +9,7 @@ class StaffController extends Controller
 {
     public function index()
     {
-        $staffs = staff::getAllStaff();
+        $staffs = Staff::getAllStaff();
         return view('staffs.index', compact('staffs'));
     }
 
@@ -20,31 +20,31 @@ class StaffController extends Controller
 
     public function store(Request $request)
     {
-        $result = staff::storeStaff($request);
+        $result = Staff::storeStaff($request);
         return redirect()->route('staffs.index')->with($result['status'], $result['message']);
     }
 
     public function show($id)
     {
-        $staff = staff::getStaff($id);
+        $staff = Staff::getStaff($id);
         return view('staffs.show', compact('staff'));
     }
 
     public function edit($id)
     {
-        $staff = staff::getStaff($id);
+        $staff = Staff::getStaff($id);
         return view('staffs.edit', compact('staff'));
     }
 
     public function update(Request $request, $id)
     {
-        $result = staff::updateStaff($request, $id);
+        $result = Staff::updateStaff($request, $id);
         return redirect()->route('staffs.index')->with($result['status'], $result['message']);
     }
 
     public function destroy($id)
     {
-        $result = staff::deleteStaff($id);
+        $result = Staff::deleteStaff($id);
         return redirect()->route('staffs.index')->with($result['status'], $result['message']);
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
-class kategori extends Model
+class Kategori extends Model
 {
     use HasFactory;
 
@@ -17,13 +17,11 @@ class kategori extends Model
         'namaKategori'
     ];
 
-    // Relasi dengan model Barang
     public function barang()
     {
         return $this->hasMany(Barang::class);
     }
 
-    // Fungsi untuk validasi data kategori
     public static function validateData($data)
     {
         return Validator::make($data, [
@@ -31,23 +29,15 @@ class kategori extends Model
         ])->validate();
     }
 
-    // Fungsi untuk menyimpan kategori baru
     public static function createKategori($data)
     {
-        // Validasi data
         self::validateData($data);
-
-        // Menyimpan kategori
         return self::create($data);
     }
 
-    // Fungsi untuk memperbarui kategori
     public static function updateKategori($id, $data)
     {
-        // Validasi data
         self::validateData($data);
-
-        // Mencari kategori dan memperbarui data
         $kategori = self::findOrFail($id);
         $kategori->update($data);
 

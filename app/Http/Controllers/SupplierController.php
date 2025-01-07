@@ -20,7 +20,6 @@ class SupplierController extends Controller
 
     public function store(Request $request)
     {
-        // Menyimpan data supplier menggunakan model
         $result = Supplier::createSupplier($request->all());
 
         if (isset($result['errors'])) {
@@ -42,13 +41,11 @@ class SupplierController extends Controller
 
     public function update(Request $request, Supplier $supplier)
     {
-        // Memperbarui data supplier menggunakan model
         $result = Supplier::updateSupplier($supplier->id, $request->all());
 
         if (isset($result['errors'])) {
             return redirect()->back()->withErrors($result['errors'])->withInput();
         }
-
         return redirect()->route('suppliers.index')->with('success', $result['success']);
     }
 

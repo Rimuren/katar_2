@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
-class opname extends Model
+class Opname extends Model
 {
     use HasFactory;
     
@@ -27,7 +27,6 @@ class opname extends Model
         return $this->belongsTo(Staff::class, 'idstaff');
     }
 
-    // Fungsi untuk validasi dan simpan data opname
     public static function createOpname($data)
     {
         $validator = Validator::make($data, [

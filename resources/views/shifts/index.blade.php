@@ -12,7 +12,9 @@
             </div>
             <div class="card border-0 shadow-sm rounded">
                 <div class="card-body">
-                    <a href="{{ route('shifts.create') }}" class="btn btn-success mb-3">Tambah Shift</a>
+                    <a href="{{ route('shifts.create') }}" class="btn btn-success mb-3">
+                        <i class="fas fa-plus-circle"></i> Tambah Shift
+                    </a>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -31,11 +33,15 @@
                                     <td>{{ $shift->jamKerja }}</td>
                                     <td>{{ $shift->jamPulang }}</td>
                                     <td class="text-center"> <!-- Menambahkan class 'text-center' di sini -->
-                                        <a href="{{ route('shifts.edit', $shift->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="{{ route('shifts.edit', $shift->id) }}" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
                                         <form action="{{ route('shifts.destroy', $shift->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus shift ini?')">Hapus</button>
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus shift ini?')">
+                                            <i class="fas fa-trash"></i> Hapus
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>
