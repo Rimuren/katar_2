@@ -37,7 +37,7 @@ class Transaksi extends Model
         $validator = Validator::make($data, [
             'idPelanggan' => 'required|exists:pelanggan,id',
             'idStaff' => 'required|exists:staff,id',
-            'namaTransaksi' => 'required|string|max:255',
+            'namaTransaksi' => 'string|max:255',
             'tglTransaksi' => 'required|date',
             'totalTransaksi' => 'required|integer|min:0',
             'tipeTransaksi' => 'required|in:beli,tukar',

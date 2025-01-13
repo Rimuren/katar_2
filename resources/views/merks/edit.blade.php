@@ -5,12 +5,14 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card border-0 shadow-sm rounded">
+                    <div class="card-header">
+                        <h3>Edit Merk</h3>
+                    </div>
                     <div class="card-body">
-                        <h3 class="text-center mb-4">Edit Merk</h3>
                         <form action="{{ route('merks.update', $merk->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            
+
                             <div class="form-group">
                                 <label for="namaMerk">Nama Merk</label>
                                 <input type="text" class="form-control @error('namaMerk') is-invalid @enderror" 
@@ -19,8 +21,11 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                                <button type="submit" class="btn btn-primary btn-block">Update</button>
-                                <a href="{{ route('merks.index') }}" class="btn btn-secondary btn-block">Batal</a>
+
+                            <div class="form-group text-right">
+                                <button type="submit" class="btn btn-primary mt-3 mr-1">Simpan</button>
+                                <a href="{{ route('merks.index') }}" class="btn btn-secondary mt-3">Batal</a>
+                            </div>
                         </form>
                     </div>
                 </div>

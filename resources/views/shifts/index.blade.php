@@ -32,7 +32,7 @@
                                     <td>{{ $shift->staff->namaStaff }}</td>
                                     <td>{{ $shift->jamKerja }}</td>
                                     <td>{{ $shift->jamPulang }}</td>
-                                    <td class="text-center"> <!-- Menambahkan class 'text-center' di sini -->
+                                    <td class="text-center">
                                         <a href="{{ route('shifts.edit', $shift->id) }}" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i> Edit
                                         </a>

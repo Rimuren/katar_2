@@ -88,7 +88,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('idPelanggan');
             $table->unsignedBigInteger('idStaff');
-            $table->string('namaTransaksi');
+            $table->string('namaTransaksi')->nullable();
             $table->date('tglTransaksi');
             $table->integer('totalTransaksi');
             $table->enum('tipeTransaksi', ['beli', 'tukar']);

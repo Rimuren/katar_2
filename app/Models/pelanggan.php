@@ -41,21 +41,22 @@ class Pelanggan extends Model
     {
         $validator = Validator::make($data, [
             'namaPelanggan' => 'string|max:255',
-            'noTlp' => 'numeric|unique:pelanggan,noTlp,',
-            'email' => 'string|email|max:255|unique:pelanggan,email,',
+            'noTlp' => 'numeric|unique:pelanggan,noTlp,' . $id, 
+            'email' => 'string|email|max:255|unique:pelanggan,email,' . $id, 
         ]);
-
+    
         if ($validator->fails()) {
             return ['errors' => $validator->errors()];
         }
 
         $pelanggan = self::findOrFail($id);
+
         $pelanggan->update([
             'namaPelanggan' => $data['namaPelanggan'],
             'noTlp' => $data['noTlp'],
             'email' => $data['email'],
         ]);
-
+    
         return ['success' => 'Pelanggan berhasil diperbarui.', 'data' => $pelanggan];
     }
 }
