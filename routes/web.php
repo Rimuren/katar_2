@@ -17,8 +17,8 @@ Route::get('/', function () {
     return view('guests.index');
 }); 
 
-// home
-Route::resource('home', DashboardController::class);
+// dashboard
+Route::resource('dashboard', DashboardController::class);
 
 // CRUD transaksi
 Route::resource('transaksis',TransaksiController::class);

@@ -1,6 +1,6 @@
 @extends('layouts.apperance')   
 
-@section('title', 'Home')
+@section('title', 'Dashboard')
 
 @section('content')
     <div class="jumbotron text-center bg-light p-5 rounded">
