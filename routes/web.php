@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MerkController;
@@ -18,7 +18,7 @@ Route::get('/', function () {
 }); 
 
 // home
-Route::resource('home', HomeController::class);
+Route::resource('home', DashboardController::class);
 
 // CRUD transaksi
 Route::resource('transaksis',TransaksiController::class);
