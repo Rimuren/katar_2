@@ -9,10 +9,8 @@ use Illuminate\Support\Facades\Validator;
 class Cashdrawer extends Model
 {
     use HasFactory;
-
     protected $table = 'cash_drawer';
     public $timestamps = false;
-
     protected $fillable = ['idshift', 'jamBuka', 'jamTutup', 'saldoAwal', 'saldoAkhir'];
 
     public function shift()

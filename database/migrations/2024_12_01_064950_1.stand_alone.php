@@ -20,8 +20,6 @@ return new class extends Migration
             $table->timestamps();
         });
         
-        
-
         // Tabel Supplier
         Schema::create('supplier', function (Blueprint $table) {
             $table->id();

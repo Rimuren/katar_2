@@ -23,7 +23,7 @@ class CashDrawerController extends Controller
     public function store(Request $request)
     {
         $result = CashDrawer::createCashDrawer($request->all());
-        return redirect()->route('cashdrawers.index')->with('success', $result['success']);
+        return redirect()->route('cashdrawers.index')->with('success', 'CashDrawer Berhasil dibuat');
     }
 
     public function edit($id)
@@ -37,7 +37,7 @@ class CashDrawerController extends Controller
     public function update(Request $request, $id)
     {
         $result = CashDrawer::updateCashDrawer($id, $request->all());
-        return redirect()->route('cashdrawers.index')->with('success', $result['success']);
+        return redirect()->route('cashdrawers.index')->with('success', 'CashDrawer berhasil diperbarui');
     }
 
     public function destroy($id)

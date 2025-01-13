@@ -24,7 +24,6 @@ return new class extends Migration
             $table->foreign('idPelanggan')->references('id')->on('pelanggan')->onDelete('cascade');
         });
 
-        
         // Tabel barang
         Schema::create('barang', function (Blueprint $table) {
             $table->id();
