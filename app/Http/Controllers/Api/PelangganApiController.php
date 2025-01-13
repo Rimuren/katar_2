@@ -58,7 +58,7 @@ class PelangganApiController extends Controller
         $data = $request->all(); // Mengambil data dari request
 
         // Update merk
-        $pelanggan = Pelanggan::updatePelanggan($id, $data); // Memperbarui pelanggan
+        $pelanggan = Pelanggan::updateApiPelanggan($id, $data); // Memperbarui pelanggan
 
         return new PelangganResource($pelanggan); // Mengembalikan pelanggan yang diperbarui
     }

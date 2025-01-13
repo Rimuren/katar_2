@@ -57,6 +57,40 @@ class Pelanggan extends Model
 
         $pelanggan->update($data);
     
-        return ['success' => 'Pelanggan berhasil diperbarui.', 'data' => $pelanggan];
+        return ['success' => 'Pelanggan berhasil diperbarui.', $pelanggan];
+    }
+
+    public static function updateApiPelanggan($id, $data)
+    {
+        // Validasi data yang diterima
+        $validator = Validator::make($data, [
+            'namaPelanggan' => 'string|max:255',
+            'noTlp' => 'string|unique:pelanggan,noTlp,' . $id,
+            'email' => 'string|email|max:255|unique:pelanggan,email,' . $id,
+        ]);
+
+        if ($validator->fails()) {
+            return [
+                'status' => 'error',
+                'message' => $validator->errors(),
+            ];
+        }
+
+        // Mencari pelanggan berdasarkan ID
+        $pelanggan = self::find($id);
+
+        // Jika pelanggan tidak ditemukan
+        if (!$pelanggan) {
+            return [
+                'status' => 'error',
+                'message' => 'Pelanggan tidak ditemukan',
+            ];
+        }
+
+        // Perbarui data pelanggan
+        $pelanggan->update($data);
+
+        // Mengembalikan data pelanggan yang diperbarui
+        return $pelanggan;
     }
 }

@@ -78,4 +78,34 @@ class Supplier extends Model
     {
         return ['status' => 'error', 'message' => $errors];
     }
+
+    public static function createApiSupplier($data)
+    {
+        $validator = self::validateSupplier($data);
+        if ($validator->fails()) {
+            return ['status' => 'error', 'message' => $validator->errors()];
+        }
+
+        return self::create($validator->validated());
+    }
+
+    public static function updateApiSupplier($id, $data)
+    {
+        $validator = self::validateSupplier($data, $id);
+        if ($validator->fails()) {
+            return ['status' => 'error', 'message' => $validator->errors()];
+        }
+
+        $supplier = self::findOrFail($id);
+        $supplier->update($validator->validated());
+        return $supplier;
+    }
+
+    public static function deleteApiSupplier($id)
+    {
+        $supplier = self::findOrFail($id);
+        $supplier->delete();
+        return ['status' => 'success', 'message' => 'Supplier berhasil dihapus'];
+    }
 }
+
