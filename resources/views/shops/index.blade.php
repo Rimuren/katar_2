@@ -20,7 +20,7 @@
                 <tbody>
                     @foreach($shops as $shop)
                         <tr>
-                            <td>{{ $shop->idshop }}</td>
+                            <td>{{ $shop->id }}</td>
                             <td>{{ $shop->barang->namaBarang }}</td> <!-- Menampilkan nama barang -->
                             <td>
                                 @if ($shop->image)
