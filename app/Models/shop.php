@@ -13,8 +13,10 @@ class Shop extends Model
     protected $table = 'shop';
 
     protected $fillable = [
-        'namaBarang', 'idbarang', 'image'
+        'jumlahPoin', 'idbarang', 'image'
     ];
+
+    public $timestamps = false;
 
     // Relasi dengan model Barang
     public function barang()
@@ -27,7 +29,7 @@ class Shop extends Model
     {
         // Set rules yang akan digunakan untuk validasi
         $rules = [
-            'namaBarang' => 'required|string|max:255',
+            'jumlahPoin' => 'required|string|max:255',
             'idbarang' => 'required|exists:barang,id',
             'image' => $isUpdate ? 'nullable|image|mimes:jpg,jpeg,png,gif' : 'required|image|mimes:jpg,jpeg,png,gif',
         ];
