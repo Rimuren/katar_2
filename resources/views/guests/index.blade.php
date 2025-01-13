@@ -1,7 +1,5 @@
 @extends('guests.layouts.apperance')  
 
-@section('title', 'Katar')
-
 @section('content')
 <div class="" id="card-color">
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">

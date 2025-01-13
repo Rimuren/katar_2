@@ -7,6 +7,7 @@ use App\Http\Controllers\MerkController;
 use App\Http\Controllers\pelangganController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ShiftController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CashDrawerController;
 use App\Http\Controllers\OpnameController;
@@ -43,6 +44,9 @@ Route::resource('staffs', StaffController::class);
 
 // CRUD shift
 Route::resource('shifts', ShiftController::class);
+
+// CRUD shop
+Route::resource('shop', ShopController::class);
 
 // CRUD cashdrawer
 Route::resource('cashdrawers', CashdrawerController::class);

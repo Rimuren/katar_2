@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 
 class Shop extends Model
 {
@@ -12,16 +13,25 @@ class Shop extends Model
     protected $table = 'shop';
 
     protected $fillable = [
-        'idbarang', 'poinRequired'
+        'namaBarang', 'idbarang', 'image'
     ];
 
+    // Relasi dengan model Barang
     public function barang()
     {
-        return $this->belongsTo(barang::class, 'idbarang');
+        return $this->belongsTo(Barang::class, 'idbarang');
     }
 
-    public function penukaran()
+    // Fungsi validasi untuk Store dan Update
+    public static function validate($data, $isUpdate = false)
     {
-        return $this->hasMany(penukaran::class);
+        // Set rules yang akan digunakan untuk validasi
+        $rules = [
+            'namaBarang' => 'required|string|max:255',
+            'idbarang' => 'required|exists:barang,id',
+            'image' => $isUpdate ? 'nullable|image|mimes:jpg,jpeg,png,gif' : 'required|image|mimes:jpg,jpeg,png,gif',
+        ];
+
+        return Validator::make($data, $rules);
     }
 }

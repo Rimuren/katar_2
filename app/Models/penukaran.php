@@ -9,24 +9,27 @@ class Penukaran extends Model
 {
     use HasFactory;
 
-    protected $table = 'penukaran';
+    protected $table = 'penukaran'; 
 
     protected $fillable = [
-        'idtransaksi', 'idpelanggan', 'idshop', 'pointUsed', 'tglRedeem'
+        'idtransaksi', 'idpelanggan', 'idshop', 'pointUsed', 'tglReedem'
     ];
 
-    public function transaksi()
-    {
-        return $this->belongsTo(transaksi::class, 'idtransaksi');
-    }
-
-    public function pelanggan()
-    {
-        return $this->belongsTo(pelanggan::class, 'idpelanggan');
-    }
-
+    // Relasi dengan model Shop
     public function shop()
     {
-        return $this->belongsTo(shop::class, 'idshop');
+        return $this->belongsTo(Shop::class, 'idshop');
+    }
+
+    // Relasi dengan model Poin
+    public function poin()
+    {
+        return $this->belongsTo(Poin::class, 'idpoin');
+    }
+
+    // Relasi dengan model Transaksi
+    public function transaksi()
+    {
+        return $this->belongsTo(Transaksi::class, 'idtransaksi');
     }
 }
