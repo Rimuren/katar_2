@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
-class CashDrawer extends Model
+class Cashdrawer extends Model
 {
     use HasFactory;
 
@@ -48,8 +48,6 @@ class CashDrawer extends Model
 
         return ['success' => 'Cash Drawer berhasil ditambahkan.', 'data' => $cashdrawer];
     }
-
-    
 
     public static function updateCashDrawer($id, $data)
     {
