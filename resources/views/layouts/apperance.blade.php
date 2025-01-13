@@ -259,7 +259,7 @@
             </button>
 
             <!-- Logo Kasir Pintar and Laravel -->
-            <a class="navbar-brand d-flex align-items-center ms-3" href="/home" style="text-decoration: none;">
+            <a class="navbar-brand d-flex align-items-center ms-3" href="/dashboard" style="text-decoration: none;">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="Laravel Logo" class="brand-logo" style="height: 30px; margin-right: 10px;">
                 <span class="brand-text" style="color: var(--navbar-text-color);">Kasir Pintar</span>
             </a>
