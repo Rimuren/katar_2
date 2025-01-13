@@ -63,7 +63,7 @@ class ShopController extends Controller
         // Ambil data yang dibutuhkan
         $data = $request->only(['jumlahPoin', 'idbarang']);
 
-        // Jika ada gambar baru yang diunggah
+        //  Jika ada gambar baru yang diunggah
         if ($request->hasFile('image')) {
             // Hapus gambar lama jika ada
             if ($shop->image) {
