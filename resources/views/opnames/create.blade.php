@@ -38,6 +38,7 @@
                                 <input type="number" name="stokFisik" class="form-control" required>
                             </div>
                             <button type="submit" class="btn btn-success btn-block">Simpan</button>
+                            <a href="{{ route('opnames.index') }}" class="btn btn-secondary">Batal</a>
                         </form>
                     </div>
                 </div>

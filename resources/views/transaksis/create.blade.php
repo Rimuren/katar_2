@@ -54,7 +54,7 @@
                 <option value="tukar">Tukar</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Simpan Transaksi</button>
+        <button type="submit" class="btn btn-primary mt-3">Simpan</button>
         <a href="{{ route('transaksis.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>

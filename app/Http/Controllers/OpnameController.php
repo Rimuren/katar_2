@@ -25,11 +25,7 @@ class OpnameController extends Controller
     public function store(Request $request)
     {
         $result = Opname::createOpname($request->all());
-        if (isset($result['errors'])) {
-            return redirect()->back()->withErrors($result['errors'])->withInput();
-        }
-
-        return redirect()->route('opnames.index')->with('success', $result['success']);
+        return $result;
     }
 
     public function edit($id)
@@ -43,18 +39,12 @@ class OpnameController extends Controller
     public function update(Request $request, $id)
     {
         $result = Opname::updateOpname($id, $request->all());
-        if (isset($result['errors'])) {
-            return redirect()->back()->withErrors($result['errors'])->withInput();
-        }
-
-        return redirect()->route('opnames.index')->with('success', $result['success']);
+        return $result;
     }
 
     public function destroy($id)
     {
-        $opname = Opname::findOrFail($id);
-        $opname->delete();
-
-        return redirect()->route('opnames.index')->with('success', 'Opname berhasil dihapus');
+        $result = Opname::destroyOpname($id);
+        return $result;
     }
 }

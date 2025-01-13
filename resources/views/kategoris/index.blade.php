@@ -18,7 +18,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">Nama Kategori</th>
+                                    <th scope="col" class="text-center">Nama Kategori</th>
                                     <th scope="col" class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -26,7 +26,7 @@
                                 @foreach ($kategoris as $kategori)
                                     <tr>
                                         <td>{{ $kategori->namaKategori }}</td>
-                                        <td class="text-center"> <!-- Menambahkan class 'text-center' di sini -->
+                                        <td class="text-center">
                                             <a href="{{ route('kategoris.edit', $kategori->id) }}" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-edit"></i> Edit
                                             </a>
@@ -34,7 +34,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin?')">
-                                                    <i class="fas fa-edit"></i> Hapus
+                                                    <i class="fas fa-trash"></i> Hapus
                                                 </button>
                                             </form>
                                         </td>

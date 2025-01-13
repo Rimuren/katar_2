@@ -9,8 +9,7 @@ class SupplierController extends Controller
 {
     public function index()
     {
-        $suppliers = Supplier::all();
-        return view('suppliers.index', compact('suppliers'));
+        return view('suppliers.index', ['suppliers' => Supplier::getAllSuppliers()]);
     }
 
     public function create()
@@ -21,12 +20,7 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         $result = Supplier::createSupplier($request->all());
-
-        if (isset($result['errors'])) {
-            return redirect()->back()->withErrors($result['errors'])->withInput();
-        }
-
-        return redirect()->route('suppliers.index')->with('success', $result['success']);
+        return $this->redirectWithResult($result, 'suppliers.index');
     }
 
     public function show(Supplier $supplier)
@@ -42,17 +36,17 @@ class SupplierController extends Controller
     public function update(Request $request, Supplier $supplier)
     {
         $result = Supplier::updateSupplier($supplier->id, $request->all());
-
-        if (isset($result['errors'])) {
-            return redirect()->back()->withErrors($result['errors'])->withInput();
-        }
-        return redirect()->route('suppliers.index')->with('success', $result['success']);
+        return $this->redirectWithResult($result, 'suppliers.index');
     }
 
     public function destroy(Supplier $supplier)
     {
-        $supplier->delete();
+        $result = Supplier::deleteSupplier($supplier->id);
+        return $this->redirectWithResult($result, 'suppliers.index');
+    }
 
-        return redirect()->route('suppliers.index')->with('success', 'Supplier berhasil dihapus.');
+    private function redirectWithResult($result, $route)
+    {
+        return redirect()->route($route)->with($result['status'], $result['message']);
     }
 }

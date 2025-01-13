@@ -20,10 +20,7 @@ class MerkController extends Controller
 
     public function store(Request $request)
     {
-        Merk::createMerk([
-            'namaMerk' => $request->namaMerk,
-        ]);
-
+        Merk::createMerk(['namaMerk' => $request->namaMerk,]);
         return redirect()->route('merks.index')->with('success', 'Merk berhasil ditambahkan.');
     }
 
@@ -35,10 +32,7 @@ class MerkController extends Controller
 
     public function update(Request $request, $id)
     {
-        Merk::updateMerk($id, [
-            'namaMerk' => $request->namaMerk,
-        ]);
-
+        Merk::updateMerk($id, ['namaMerk' => $request->namaMerk,]);
         return redirect()->route('merks.index')->with('success', 'Merk berhasil diperbarui.');
     }
 

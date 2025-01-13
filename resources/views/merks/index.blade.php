@@ -12,37 +12,38 @@
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('merks.create') }}" class="btn btn-md btn-success mb-3">
+                        <a href="{{ route('merks.create') }}" class="btn btn-success mb-3">
                             <i class="fas fa-plus-circle"></i> Tambah Merk
                         </a>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nama Merk</th>
-                                    <th scope="col" class="text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($merks as $merk)
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark">
                                     <tr>
-                                        <td>{{ $merk->namaMerk }}</td>
-                                        <td class="text-center"> <!-- Menambahkan class 'text-center' untuk tombol -->
-                                            <a href="{{ route('merks.edit', $merk->id) }}" class="btn btn-primary btn-sm">
-                                            <i class="fas fa-edit"></i> Edit
-                                            </a>
-                                            <form action="{{ route('merks.destroy', $merk->id) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin?')">
-                                                <i class="fas fa-trash"></i> Hapus
-                                                </button>
-                                            </form>
-                                        </td>
+                                        <th scope="col" class="text-center">Nama Merk</th>
+                                        <th scope="col" class="text-center">Aksi</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-
+                                </thead>
+                                <tbody>
+                                    @foreach ($merks as $merk)
+                                        <tr>
+                                            <td>{{ $merk->namaMerk }}</td>
+                                            <td class="text-center">
+                                                <a href="{{ route('merks.edit', $merk->id) }}" class="btn btn-primary btn-sm px-2 py-1">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
+                                                <form action="{{ route('merks.destroy', $merk->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm px-2 py-1" onclick="return confirm('Apakah Anda yakin?')">
+                                                        <i class="fas fa-trash"></i> Hapus
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                         @if ($merks->isEmpty())
                             <div class="alert alert-warning text-center">
                                 Tidak ada data merk yang tersedia.

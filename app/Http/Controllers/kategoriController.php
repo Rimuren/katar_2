@@ -20,9 +20,7 @@ class KategoriController extends Controller
 
     public function store(Request $request)
     {
-        Kategori::createKategori([
-            'namaKategori' => $request->namaKategori,
-        ]);
+        Kategori::createKategori(['namaKategori' => $request->namaKategori,]);
         return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil ditambahkan');
     }
 
@@ -34,10 +32,7 @@ class KategoriController extends Controller
 
     public function update(Request $request, $id)
     {
-        Kategori::updateKategori($id, [
-            'namaKategori' => $request->namaKategori,
-        ]);
-
+        Kategori::updateKategori($id, ['namaKategori' => $request->namaKategori,]);
         return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil diubah');
     }
 

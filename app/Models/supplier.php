@@ -21,38 +21,61 @@ class Supplier extends Model
         return $this->hasMany(Pembelian::class);
     }
 
+    public static function getAllSuppliers()
+    {
+        return self::all();
+    }
+
     public static function createSupplier($data)
     {
-        $validator = Validator::make($data, [
-            'namaSupplier' => 'required|string|max:255',
-            'noTlp' => 'required|string|max:15',
-            'email' => 'required|email|unique:supplier,email',
-        ]);
+        $validator = self::validateSupplier($data);
 
         if ($validator->fails()) {
-            return ['errors' => $validator->errors()];
+            return self::errorResult($validator->errors());
         }
 
-        $supplier = self::create($data);
-
-        return ['success' => 'Supplier berhasil ditambahkan.', 'data' => $supplier];
+        self::create($validator->validated());
+        return self::successResult('Supplier berhasil ditambahkan.');
     }
 
     public static function updateSupplier($id, $data)
     {
-        $validator = Validator::make($data, [
-            'namaSupplier' => 'required|string|max:255',
-            'noTlp' => 'required|string|max:15',
-            'email' => 'required|email|unique:supplier,email,' . $id,
-        ]);
+        $validator = self::validateSupplier($data, $id);
 
         if ($validator->fails()) {
-            return ['errors' => $validator->errors()];
+            return self::errorResult($validator->errors());
         }
 
         $supplier = self::findOrFail($id);
-        $supplier->update($data);
+        $supplier->update($validator->validated());
+        return self::successResult('Supplier berhasil diperbarui.');
+    }
 
-        return ['success' => 'Supplier berhasil diperbarui.', 'data' => $supplier];
+    public static function deleteSupplier($id)
+    {
+        $supplier = self::findOrFail($id);
+        $supplier->delete();
+        return self::successResult('Supplier berhasil dihapus.');
+    }
+
+    private static function validateSupplier($data, $id = null)
+    {
+        $rules = [
+            'namaSupplier' => 'required|string|max:255',
+            'noTlp' => 'required|string|max:15',
+            'email' => 'required|email|unique:supplier,email' . ($id ? ',' . $id : ''),
+        ];
+
+        return Validator::make($data, $rules);
+    }
+
+    private static function successResult($message)
+    {
+        return ['status' => 'success', 'message' => $message];
+    }
+
+    private static function errorResult($errors)
+    {
+        return ['status' => 'error', 'message' => $errors];
     }
 }

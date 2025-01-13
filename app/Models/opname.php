@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class Opname extends Model
 {
     use HasFactory;
-    
+
     public $timestamps = false;
     protected $table = 'opname';
 
@@ -27,7 +27,7 @@ class Opname extends Model
         return $this->belongsTo(Staff::class, 'idstaff');
     }
 
-    public static function createOpname($data)
+    private static function validateData($data)
     {
         $validator = Validator::make($data, [
             'idbarang' => 'required|exists:barang,id',
@@ -40,6 +40,16 @@ class Opname extends Model
 
         if ($validator->fails()) {
             return ['errors' => $validator->errors()];
+        }
+
+        return [];
+    }
+
+    public static function createOpname($data)
+    {
+        $validationResult = self::validateData($data);
+        if (!empty($validationResult)) {
+            return $validationResult;
         }
 
         $barang = Barang::find($data['idbarang']);
@@ -56,21 +66,15 @@ class Opname extends Model
             'selisih' => $selisih,
         ]);
 
-        return ['success' => 'Opname berhasil disimpan.', 'data' => $opname];
+        return redirect()->route('opnames.index')->with('success', 'Opname berhasil disimpan.')->with('data', $opname);
+
     }
+
     public static function updateOpname($id, $data)
     {
-        $validator = Validator::make($data, [
-            'idbarang' => 'required|exists:barang,id',
-            'idstaff' => 'required|exists:staff,id',
-            'tglOpname' => 'required|date',
-            'stokFisik' => 'required|numeric',
-            'stokSistem' => 'nullable|numeric',
-            'selisih' => 'nullable|numeric',
-        ]);
-
-        if ($validator->fails()) {
-            return ['errors' => $validator->errors()];
+        $validationResult = self::validateData($data);
+        if (!empty($validationResult)) {
+            return $validationResult;
         }
 
         $barang = Barang::find($data['idbarang']);
@@ -88,6 +92,14 @@ class Opname extends Model
             'selisih' => $selisih,
         ]);
 
-        return ['success' => 'Opname berhasil diperbarui.', 'data' => $opname];
+        return redirect()->route('opnames.index')->with('success', 'Opname berhasil diperbarui.')->with('data', $opname);
+    }
+
+    public static function destroyOpname($id)
+    {
+        $opname = self::findOrFail($id);
+        $opname->delete();
+
+        return redirect()->route('opnames.index')->with('success', 'Opname berhasil dihapus.');
     }
 }
