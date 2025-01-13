@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
+        /* Reset margin/padding */
         body, html {
             margin: 0;
             padding: 0;
@@ -15,6 +16,7 @@
             font-family: Arial, sans-serif;
         }
 
+        /* Variabel untuk warna agar mudah diubah */
         :root {
             --navbar-bg-color-light: #ffffff; 
             --footer-bg-color-light: #ffffff;
@@ -103,14 +105,15 @@
             padding: 15px;
         }
 
+        /* Styling carousel control buttons */
 .carousel-control-prev,
 .carousel-control-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 10;
-    width: 80px;
-    height: 80px;
+    z-index: 10;  /* Ensure the button is above other content */
+    width: 80px;  /* Adjust size as needed */
+    height: 80px; /* Adjust size as needed */
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -118,21 +121,24 @@
     cursor: pointer;
 }
 
+/* Remove background and make the icon itself visible */
 .carousel-control-prev-icon, 
 .carousel-control-next-icon {
-    background-color: transparent;
+    background-color: transparent;  /* Make the background transparent */
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    background-size: contain;
-    background-position: center;
+    width: 40px;   /* Increased icon size */
+    height: 40px;  /* Increased icon size */
+    background-size: contain;  /* Ensures the icon remains sharp */
+    background-position: center;  /* Centers the icon */
 }
+
+/* Adjusting the position of the previous and next buttons */
 .carousel-control-prev {
-    left: 10px;
+    left: 10px;   /* Move the previous arrow closer to the edge */
 }
 
 .carousel-control-next {
-    right: 10px;
+    right: 10px;  /* Move the next arrow closer to the edge */
 }
 
 
@@ -195,21 +201,18 @@
 
 <body class="d-flex flex-column min-vh-100">
 
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
+            <!-- Logo Kasir Pintar and Laravel -->
             <a class="navbar-brand d-flex align-items-center ms-3" href="#" onclick="location.reload()" style="text-decoration: none;">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="Laravel Logo" class="brand-logo" style="height: 30px; margin-right: 10px;">
                 <span class="brand-text" style="color: var(--navbar-text-color);">Kasir Pintar</span>
             </a>
 
             <div class="d-flex align-items-center">
-                <!-- Login dan Masuk -->
-                <!-- ganti href="{{ route(...) }}" ke Halaman Login/Daftar -->
-                <a href="{{ route('home.index') }}" class="btn btn-primary ms-2">Daftar</a>
-                <a href="{{ route('home.index') }}" class="btn btn-secondary ms-2">Masuk</a>
-
-
-                <!-- Theme Button -->
+            
+                <!-- Theme Toggle Button -->
                 <button class="btn btn-link" id="themeToggle" aria-label="Toggle Theme">
                     <i class="fas fa-moon" style="color: var(--navbar-text-color);"></i>
                 </button>

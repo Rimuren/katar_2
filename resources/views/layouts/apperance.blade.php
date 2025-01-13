@@ -279,7 +279,7 @@
         </div>
         <div class="offcanvas-body">
             <ul class="list-unstyled">
-            <li><a href="{{ url('/dashboard') }}" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="{{ url('/home') }}" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                 <li><a href="{{ url('/staffs') }}" class="nav-link"><i class="fas fa-users"></i> Staff</a></li>
                 <li><a href="{{ url('/shifts') }}" class="nav-link"><i class="fas fa-clock"></i> Shift</a></li>
                 <li><a href="{{ url('/barangs') }}" class="nav-link"><i class="fas fa-cogs"></i> Barang</a></li>
@@ -287,9 +287,7 @@
                 <li><a href="{{ url('/kategoris') }}" class="nav-link"><i class="fas fa-th-large"></i> Kategori</a></li>
                 <li><a href="{{ url('/suppliers') }}" class="nav-link"><i class="fas fa-truck"></i> Supplier</a></li>
                 <li><a href="{{ url('/cashdrawers') }}" class="nav-link"><i class="fas fa-cash-register"></i> Cashdrawer</a></li>
-                <li><a href="{{ url('/opnames') }}" class="nav-link"><i class="fas fa-search"></i> Opname</a></li>
-                <li><a href="{{ url('/pelanggans') }}" class="nav-link"><i class="fas fa-person"></i> Pelanggan</a></li>
-                <li><a href="{{ url('/transaksis') }}" class="nav-link"><i class="fas fa-text"></i> Transaksi</a></li>
+                <li><a href="{{ url('/opnames') }}" class="nav-link"><i class="fas fa-box"></i> Opname</a></li>
             </ul>
         </div>
     </div>
