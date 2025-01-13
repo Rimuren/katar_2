@@ -6,20 +6,20 @@
     <div class="container">
         <h1 class="my-4">Edit Shop</h1>
         
-        <form action="{{ route('shop.update', $shop->idshop) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('shop.update', $shop->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="name">Shop Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $shop->name) }}">
-                @error('name') <div class="text-danger">{{ $message }}</div> @enderror
+                <label for="jumlahPoin">Jumlah Poin</label>
+                <input type="text" class="form-control" id="jumlahPoin" name="jumlahPoin" value="{{ old('jumlahPoin') }}">
+                @error('jumlahPoin') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
 
             <div class="form-group">
                 <label for="idbarang">Barang</label>
                 <select class="form-control" id="idbarang" name="idbarang">
                     @foreach($barangs as $barang)
-                        <option value="{{ $barang->idbarang }}" {{ old('idbarang', $shop->idbarang) == $barang->idbarang ? 'selected' : '' }}>
+                        <option value="{{ $barang->id }}" {{ old('idbarang', $shop->idbarang) == $barang->idbarang ? 'selected' : '' }}>
                             {{ $barang->namaBarang }}
                         </option>
                     @endforeach

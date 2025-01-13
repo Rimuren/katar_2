@@ -9,17 +9,17 @@
         <form action="{{ route('shop.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="namaBarang">Shop Name</label>
-                <input type="text" class="form-control" id="namaBarang" name="namaBarang" value="{{ old('namaBarang') }}">
-                @error('namaBarang') <div class="text-danger">{{ $message }}</div> @enderror
+                <label for="jumlahPoin">Jumlah Poin</label>
+                <input type="text" class="form-control" id="jumlahPoin" name="jumlahPoin" value="{{ old('jumlahPoin') }}">
+                @error('jumlahPoin') <div class="text-danger">{{ $message }}</div> @enderror
             </div>
 
             <div class="form-group">
                 <label for="idbarang">Barang</label>
                 <select class="form-control" id="idbarang" name="idbarang">
                     @foreach($barangs as $barang)
-                        <option value="{{ $barang->idbarang }}" {{ old('idbarang') == $barang->idbarang ? 'selected' : '' }}>
-                            {{ $barang->namaBarang }}
+                        <option value="{{ $barang->id }}" {{ old('idbarang') == $barang->idbarang ? 'selected' : '' }}>
+                            {{ $barang->namaBarang }} (Poin: {{ $barang->jumlahPoin }})
                         </option>
                     @endforeach
                 </select>
@@ -34,5 +34,6 @@
 
             <button type="submit" class="btn btn-success mt-3">Save Shop</button>
         </form>
-    </div>
+        </div>
+   
 @endsection

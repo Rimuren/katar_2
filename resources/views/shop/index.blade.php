@@ -12,7 +12,6 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
                         <th>Barang</th>
                         <th>Image</th>
                         <th>Actions</th>
@@ -22,8 +21,7 @@
                     @foreach($shops as $shop)
                         <tr>
                             <td>{{ $shop->idshop }}</td>
-                            <td>{{ $shop->name }}</td>
-                            <td>{{ $shop->barang->namaBarang }}</td>
+                            <td>{{ $shop->barang->namaBarang }}</td> <!-- Menampilkan nama barang -->
                             <td>
                                 @if ($shop->image)
                                     <img src="{{ asset('storage/shops/' . $shop->image) }}" width="100">
@@ -32,8 +30,8 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('shop.edit', $shop->idshop) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('shop.destroy', $shop->idshop) }}" method="POST" class="d-inline-block">
+                                <a href="{{ route('shop.edit', $shop->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('shop.destroy', $shop->id) }}" method="POST" class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>

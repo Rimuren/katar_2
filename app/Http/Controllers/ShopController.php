@@ -18,7 +18,8 @@ class ShopController extends Controller
     public function create()
     {
         $barangs = Barang::all(); 
-        return view('shop.create', compact('barangs'));
+        $shops = Shop::with('barang')->get();
+        return view('shop.create', compact('barangs', 'shops'));
     }
 
     public function store(Request $request)
@@ -29,14 +30,15 @@ class ShopController extends Controller
             return redirect()->back()->withErrors($validated)->withInput();
         }
 
-        $data = $request->only(['namaBarang', 'idbarang']);
+        // Ambil data yang dibutuhkan
+        $data = $request->only(['jumlahPoin', 'idbarang']);
 
-        // Upload gambar jika ada
+        // Jika ada file gambar yang diunggah
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('shops', 'public');
         }
 
-        // Simpan data shop
+        // Simpan data shop ke database
         Shop::create($data);
         return redirect()->route('shop.index')->with('success', 'Shop created successfully');
     }
@@ -52,22 +54,26 @@ class ShopController extends Controller
     {
         $shop = Shop::findOrFail($id);
 
-        // Validasi data update menggunakan model
+        // Validasi data update
         $validated = Shop::validate($request->all(), true);
         if ($validated->fails()) {
             return redirect()->back()->withErrors($validated)->withInput();
         }
 
-        $data = $request->only(['namaBarang', 'idbarang']);
+        // Ambil data yang dibutuhkan
+        $data = $request->only(['jumlahPoin', 'idbarang']);
 
-        // Upload gambar baru jika ada
+        // Jika ada gambar baru yang diunggah
         if ($request->hasFile('image')) {
             // Hapus gambar lama jika ada
             if ($shop->image) {
                 Storage::disk('public')->delete($shop->image);
             }
 
+            // Simpan gambar baru
             $data['image'] = $request->file('image')->store('shops', 'public');
+        } else {
+            $data['image'] = null; 
         }
 
         // Update data shop

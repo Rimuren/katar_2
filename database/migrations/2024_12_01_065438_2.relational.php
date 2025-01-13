@@ -57,7 +57,8 @@ return new class extends Migration
         Schema::create('shop', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idbarang');
-            $table->integer('poinRequired');
+            $table->integer('jumlahPoin')->nullable();
+            $table->string('image')->nullable();
 
             $table->foreign('idbarang')->references('id')->on('barang')->onDelete('cascade');
         });
