@@ -16,11 +16,13 @@ class Pelanggan extends Model
     protected $fillable = [
         'namaPelanggan', 'noTlp', 'email',
     ];
+
+    
     public static function createPelanggan($data)
     {
         $validator = Validator::make($data, [
             'namaPelanggan' => 'required|string|max:255',
-            'noTlp' => 'numeric|unique:pelanggan,noTlp',
+            'noTlp' => 'string|unique:pelanggan,noTlp',
             'email' => 'string|email|max:255|unique:pelanggan,email',
         ]);
 
@@ -41,7 +43,7 @@ class Pelanggan extends Model
     {
         $validator = Validator::make($data, [
             'namaPelanggan' => 'string|max:255',
-            'noTlp' => 'numeric|unique:pelanggan,noTlp,' . $id, 
+            'noTlp' => 'string|unique:pelanggan,noTlp,' . $id, 
             'email' => 'string|email|max:255|unique:pelanggan,email,' . $id, 
         ]);
     
@@ -49,13 +51,11 @@ class Pelanggan extends Model
             return ['errors' => $validator->errors()];
         }
 
+        $validator->validate(); 
+
         $pelanggan = self::findOrFail($id);
 
-        $pelanggan->update([
-            'namaPelanggan' => $data['namaPelanggan'],
-            'noTlp' => $data['noTlp'],
-            'email' => $data['email'],
-        ]);
+        $pelanggan->update($data);
     
         return ['success' => 'Pelanggan berhasil diperbarui.', 'data' => $pelanggan];
     }

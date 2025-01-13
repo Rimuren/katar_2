@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('pelanggan', function (Blueprint $table) {
             $table->id();
             $table->string('namaPelanggan');
-            $table->integer('noTlp')->unique();
+            $table->string('noTlp')->unique();
             $table->string('email')->unique();
             $table->timestamps();
         });
@@ -24,7 +24,7 @@ return new class extends Migration
         Schema::create('supplier', function (Blueprint $table) {
             $table->id();
             $table->string('namaSupplier');
-            $table->integer('noTlp')->unique();
+            $table->string('noTlp')->unique();
             $table->string('email')->unique();
             $table->timestamps();
         });
