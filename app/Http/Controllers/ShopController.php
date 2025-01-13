@@ -12,14 +12,14 @@ class ShopController extends Controller
     public function index()
     {
         $shops = Shop::with('barang')->get(); 
-        return view('shop.index', compact('shops'));
+        return view('shops.index', compact('shops'));
     }
 
     public function create()
     {
         $barangs = Barang::all(); 
         $shops = Shop::with('barang')->get();
-        return view('shop.create', compact('barangs', 'shops'));
+        return view('shops.create', compact('barangs', 'shops'));
     }
 
     public function store(Request $request)
@@ -40,14 +40,14 @@ class ShopController extends Controller
 
         // Simpan data shop ke database
         Shop::create($data);
-        return redirect()->route('shop.index')->with('success', 'Shop created successfully');
+        return redirect()->route('shops.index')->with('success', 'Shop created successfully');
     }
 
     public function edit($id)
     {
         $shop = Shop::findOrFail($id);
         $barangs = Barang::all();  
-        return view('shop.edit', compact('shop', 'barangs'));
+        return view('shops.edit', compact('shop', 'barangs'));
     }
 
     public function update(Request $request, $id)
@@ -78,7 +78,7 @@ class ShopController extends Controller
 
         // Update data shop
         $shop->update($data);
-        return redirect()->route('shop.index')->with('success', 'Shop updated successfully');
+        return redirect()->route('shops.index')->with('success', 'Shop updated successfully');
     }
 
     public function destroy($id)
@@ -92,6 +92,6 @@ class ShopController extends Controller
 
         // Hapus shop
         $shop->delete();
-        return redirect()->route('shop.index')->with('success', 'Shop deleted successfully');
+        return redirect()->route('shops.index')->with('success', 'Shop deleted successfully');
     }
 }

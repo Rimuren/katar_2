@@ -22,7 +22,7 @@ class CashDrawerController extends Controller
 
     public function store(Request $request)
     {
-        $result = CashDrawer::createCashDrawer($request->all());
+        CashDrawer::createCashDrawer($request->all());
         return redirect()->route('cashdrawers.index')->with('success', 'CashDrawer Berhasil dibuat');
     }
 
@@ -30,13 +30,12 @@ class CashDrawerController extends Controller
     {
         $cashdrawer = CashDrawer::findOrFail($id);
         $staffs = Staff::all();
-
         return view('cashdrawers.edit', compact('cashdrawer', 'staffs'));
     }
 
     public function update(Request $request, $id)
     {
-        $result = CashDrawer::updateCashDrawer($id, $request->all());
+        CashDrawer::updateCashDrawer($id, $request->all());
         return redirect()->route('cashdrawers.index')->with('success', 'CashDrawer berhasil diperbarui');
     }
 

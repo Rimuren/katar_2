@@ -37,13 +37,11 @@ class Staff extends Model
         return $this->hasMany(Opname::class);
     }
 
-    // Logika untuk mendapatkan semua staff
     public static function getAllStaff()
     {
         return self::all();
     }
 
-    // Logika untuk menyimpan staff baru
     public static function storeStaff($request)
     {
         $validator = Validator::make($request->all(), [

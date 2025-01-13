@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <h1 class="my-4">Shop List</h1>
-        <a href="{{ route('shop.create') }}" class="btn btn-primary mb-3">Add New Shop</a>
+        <a href="{{ route('shops.create') }}" class="btn btn-primary mb-3">Add New Shop</a>
         
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -30,8 +30,8 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('shop.edit', $shop->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('shop.destroy', $shop->id) }}" method="POST" class="d-inline-block">
+                                <a href="{{ route('shops.edit', $shop->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('shops.destroy', $shop->id) }}" method="POST" class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>

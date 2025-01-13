@@ -6,7 +6,7 @@
     <div class="container">
         <h1 class="my-4">Add New Shop</h1>
         
-        <form action="{{ route('shop.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('shops.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="jumlahPoin">Jumlah Poin</label>

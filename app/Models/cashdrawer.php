@@ -32,8 +32,8 @@ class Cashdrawer extends Model
 
         $shift = Shift::where('idstaff', $data['idstaff'])->first();
 
-        if (!$shift) {
-            return ['errors' => ['idstaff' => 'Staff ini belum memiliki shift.']];
+        if (empty($shift->jamKerja) || empty($shift->jamPulang)) {
+            return ['errors' => ['shift' => 'Shift kerja belum diisi.']];
         }
 
         $cashdrawer = self::create([
@@ -61,8 +61,8 @@ class Cashdrawer extends Model
 
         $shift = Shift::where('idstaff', $data['idstaff'])->first();
 
-        if (!$shift) {
-            return ['errors' => ['idstaff' => 'Staff ini belum memiliki shift.']];
+        if (empty($shift->jamKerja) || empty($shift->jamPulang)) {
+            return ['errors' => ['shift' => 'Shift kerja belum diisi.']];
         }
 
         $cashdrawer = self::findOrFail($id);

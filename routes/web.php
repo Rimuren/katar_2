@@ -46,7 +46,7 @@ Route::resource('staffs', StaffController::class);
 Route::resource('shifts', ShiftController::class);
 
 // CRUD shop
-Route::resource('shop', ShopController::class);
+Route::resource('shops', ShopController::class);
 
 // CRUD cashdrawer
 Route::resource('cashdrawers', CashdrawerController::class);
