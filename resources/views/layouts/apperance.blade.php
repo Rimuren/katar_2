@@ -286,11 +286,11 @@
                 <li><a href="{{ url('/kategoris') }}" class="nav-link"><i class="fas fa-th-large"></i> Kategori</a></li>
                 <li><a href="{{ url('/suppliers') }}" class="nav-link"><i class="fas fa-truck"></i> Supplier</a></li>
                 <li><a href="{{ url('/shifts') }}" class="nav-link"><i class="fas fa-clock"></i> Shift</a></li>
-                <li><a href="{{ url('/barangs') }}" class="nav-link"><i class="fas fa-cogs"></i> Barang</a></li>
+                <li><a href="{{ url('/barangs') }}" class="nav-link"><i class="fa-solid fa-box"></i> Barang</a></li>
                 <li><a href="{{ url('/cashdrawers') }}" class="nav-link"><i class="fas fa-cash-register"></i> Cashdrawer</a></li>
-                <li><a href="{{ url('/opnames') }}" class="nav-link"><i class="fas fa-box"></i> Opname</a></li>
+                <li><a href="{{ url('/opnames') }}" class="nav-link"><i class="fa-solid fa-boxes-stacked"></i></i> Opname</a></li>
                 <li><a href="{{ url('/transaksis') }}" class="nav-link"><i class="fas fa-exchange"></i> Transaksi</a></li>
-                <li><a href="{{ url('/shops') }}" class="nav-link"><i class="fas fa-exchange"></i> Shop</a></li>
+                <li><a href="{{ url('/shops') }}" class="nav-link"><i class="fa-solid fa-shop"></i> Shop</a></li>
             </ul>
         </div>
     </div>
