@@ -259,7 +259,7 @@
             </button>
 
             <!-- Logo Kasir Pintar and Laravel -->
-            <a class="navbar-brand d-flex align-items-center ms-3" href="/home" style="text-decoration: none;">
+            <a class="navbar-brand d-flex align-items-center ms-3" href="/dashboard" style="text-decoration: none;">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="Laravel Logo" class="brand-logo" style="height: 30px; margin-right: 10px;">
                 <span class="brand-text" style="color: var(--navbar-text-color);">Kasir Pintar</span>
             </a>
@@ -279,7 +279,7 @@
         </div>
         <div class="offcanvas-body">
             <ul class="list-unstyled">
-                <li><a href="{{ url('/home') }}" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="{{ url('/dashboard') }}" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                 <li><a href="{{ url('/staffs') }}" class="nav-link"><i class="fas fa-users"></i> Staff</a></li>
                 <li><a href="{{ url('/shifts') }}" class="nav-link"><i class="fas fa-clock"></i> Shift</a></li>
                 <li><a href="{{ url('/barangs') }}" class="nav-link"><i class="fas fa-cogs"></i> Barang</a></li>
