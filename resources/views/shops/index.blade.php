@@ -13,6 +13,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Barang</th>
+                        <th>Poin dibutuhkan</th>
                         <th>Image</th>
                         <th>Actions</th>
                     </tr>
@@ -21,7 +22,8 @@
                     @foreach($shops as $shop)
                         <tr>
                             <td>{{ $shop->id }}</td>
-                            <td>{{ $shop->barang->namaBarang }}</td> <!-- Menampilkan nama barang -->
+                            <td>{{ $shop->barang->namaBarang }}</td>
+                            <td>{{ $shop->jumlahPoin }}</td>
                             <td>
                                 @if ($shop->image)
                                     <img src="{{ asset('storage/shops/' . $shop->image) }}" width="100">

@@ -6,11 +6,11 @@
     <div class="container">
         <h1 class="my-4">Edit Shop</h1>
         
-        <form action="{{ route('shop.update', $shop->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('shops.update', $shop->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="jumlahPoin">Jumlah Poin</label>
+                <label for="jumlahPoin">Poin dibutuhkan</label>
                 <input type="text" class="form-control" id="jumlahPoin" name="jumlahPoin" value="{{ old('jumlahPoin') }}">
                 @error('jumlahPoin') <div class="text-danger">{{ $message }}</div> @enderror
             </div>

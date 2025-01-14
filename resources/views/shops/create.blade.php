@@ -9,7 +9,7 @@
         <form action="{{ route('shops.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="jumlahPoin">Jumlah Poin</label>
+                <label for="jumlahPoin">Poin dibutuhkan</label>
                 <input type="text" class="form-control" id="jumlahPoin" name="jumlahPoin" value="{{ old('jumlahPoin') }}">
                 @error('jumlahPoin') <div class="text-danger">{{ $message }}</div> @enderror
             </div>

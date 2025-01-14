@@ -12,6 +12,8 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CashDrawerController;
 use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\PenjualanController;
+use App\Models\Penjualan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -53,5 +55,8 @@ Route::resource('cashdrawers', CashdrawerController::class);
 
 // CRUD opname
 Route::resource('opnames',OpnameController::class);
+
+// CRUD penjualan
+Route::resource('penjualans',PenjualanController::class);
 
 

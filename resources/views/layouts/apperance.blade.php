@@ -290,6 +290,7 @@
                 <li><a href="{{ url('/cashdrawers') }}" class="nav-link"><i class="fas fa-cash-register"></i> Cashdrawer</a></li>
                 <li><a href="{{ url('/opnames') }}" class="nav-link"><i class="fa-solid fa-boxes-stacked"></i></i> Opname</a></li>
                 <li><a href="{{ url('/transaksis') }}" class="nav-link"><i class="fas fa-exchange"></i> Transaksi</a></li>
+                <li><a href="{{ url('/penjualans') }}" class="nav-link"><i class="fas fa-exchange"></i> Penjualan</a></li>
                 <li><a href="{{ url('/shops') }}" class="nav-link"><i class="fa-solid fa-shop"></i> Shop</a></li>
             </ul>
         </div>
