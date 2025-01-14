@@ -10,13 +10,14 @@ class StaffController extends Controller
 {
     public function index()
     {
-        $staffs = Staff::getAllStaff();
+        $staffs = Staff::all();
         return view('staffs.index', compact('staffs'));
     }
 
     public function create()
     {
-        return view('staffs.create');
+        $jabatans = Jabatan::all();
+        return view('staffs.create', compact('jabatans'));
     }
 
     public function store(Request $request)
@@ -33,8 +34,8 @@ class StaffController extends Controller
 
     public function edit($id)
     {
-        $staff = Staff::getStaff($id);
-        return view('staffs.edit', compact('staff'));
+        $staffWithJabatans = Staff::getStaffWithJabatans($id);
+        return view('staffs.edit', $staffWithJabatans);
     }
 
     public function update(Request $request, $id)

@@ -24,7 +24,6 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $jabatan->namaJabatan }}</td>
                 <td>
-                    <!-- Button Edit dan Delete -->
                     <a href="{{ route('jabatans.edit', $jabatan->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('jabatans.destroy', $jabatan->id) }}" method="POST" style="display:inline;">
                         @csrf
