@@ -13,6 +13,7 @@ use App\Http\Controllers\CashDrawerController;
 use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\JabatanController;
 use App\Models\Penjualan;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,9 @@ Route::resource('staffs', StaffController::class);
 
 // CRUD shift
 Route::resource('shifts', ShiftController::class);
+
+// CRUD jabatan
+Route::resource('jabatans', JabatanController::class);
 
 // CRUD shop
 Route::resource('shops', ShopController::class);

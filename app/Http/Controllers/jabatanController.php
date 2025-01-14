@@ -14,13 +14,11 @@ class JabatanController extends Controller
         return view('jabatans.index', compact('jabatans'));
     }
 
-    // Menampilkan form untuk tambah jabatan
     public function create()
     {
         return view('jabatans.create');
     }
 
-    // Menyimpan jabatan baru
     public function store(Request $request)
     {
         $request->validate([
@@ -32,14 +30,12 @@ class JabatanController extends Controller
         return redirect()->route('jabatans.index')->with('success', 'Jabatan berhasil ditambahkan.');
     }
 
-    // Menampilkan form untuk edit jabatan
     public function edit($id)
     {
         $jabatan = Jabatan::findOrFail($id);
         return view('jabatans.edit', compact('jabatan'));
     }
 
-    // Mengupdate jabatan
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -52,7 +48,6 @@ class JabatanController extends Controller
         return redirect()->route('jabatans.index')->with('success', 'Jabatan berhasil diperbarui.');
     }
 
-    // Menghapus jabatan
     public function destroy($id)
     {
         $jabatan = Jabatan::findOrFail($id);

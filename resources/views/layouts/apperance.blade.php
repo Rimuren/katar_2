@@ -284,6 +284,7 @@
                 <li><a href="{{ url('/pelanggans') }}" class="nav-link"><i class="fas fa-person"></i> Pelanggan</a></li>
                 <li><a href="{{ url('/merks') }}" class="nav-link"><i class="fas fa-tag"></i> Merk</a></li>
                 <li><a href="{{ url('/kategoris') }}" class="nav-link"><i class="fas fa-th-large"></i> Kategori</a></li>
+                <li><a href="{{ url('/jabatans') }}" class="nav-link"><i class="fas fa-th-large"></i> Jabatan</a></li>
                 <li><a href="{{ url('/suppliers') }}" class="nav-link"><i class="fas fa-truck"></i> Supplier</a></li>
                 <li><a href="{{ url('/shifts') }}" class="nav-link"><i class="fas fa-clock"></i> Shift</a></li>
                 <li><a href="{{ url('/barangs') }}" class="nav-link"><i class="fa-solid fa-box"></i> Barang</a></li>
