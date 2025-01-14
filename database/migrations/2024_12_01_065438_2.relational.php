@@ -130,6 +130,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idtransaksi');
             $table->unsignedBigInteger('idbarang');
             $table->integer('quantity');
+            $table->decimal('totalHarga', 10, 2);
             $table->date('tglPenjualan');
 
             $table->foreign('idtransaksi')->references('id')->on('transaksi')->onDelete('cascade');

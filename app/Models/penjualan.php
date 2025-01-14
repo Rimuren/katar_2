@@ -11,7 +11,7 @@ class Penjualan extends Model
     use HasFactory;
 
     protected $table = 'penjualan';
-
+    public $timestamps = false;
     protected $fillable = [
         'idtransaksi', 'idbarang', 'quantity', 'totalHarga'
     ];
