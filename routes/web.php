@@ -7,17 +7,14 @@ use App\Http\Controllers\MerkController;
 use App\Http\Controllers\pelangganController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ShiftController;
-<<<<<<< HEAD
-use App\Http\Controllers\jabatanController;
-=======
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CashDrawerController;
 use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\JabatanController;
 use App\Models\Penjualan;
->>>>>>> 2b938c89418aca66050c5faa2af7eeebc53aa142
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -51,11 +48,9 @@ Route::resource('staffs', StaffController::class);
 // CRUD shift
 Route::resource('shifts', ShiftController::class);
 
-<<<<<<< HEAD
-// CRUD Jabatan
+// CRUD jabatan
 Route::resource('jabatans', JabatanController::class);
 
-=======
 // CRUD shop
 Route::resource('shops', ShopController::class);
 
@@ -67,6 +62,5 @@ Route::resource('opnames',OpnameController::class);
 
 // CRUD penjualan
 Route::resource('penjualans',PenjualanController::class);
->>>>>>> 2b938c89418aca66050c5faa2af7eeebc53aa142
 
 

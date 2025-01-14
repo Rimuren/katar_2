@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.apperance')
 
 @section('content')
 <div class="container">
@@ -18,12 +18,4 @@
         </div>
     </form>
 </div>
-@endsection
-
-@section('styles')
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-@endsection
-
-@section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

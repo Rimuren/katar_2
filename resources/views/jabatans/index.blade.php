@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.apperance')
 
 @section('content')
 <div class="container">
@@ -39,12 +39,3 @@
 </div>
 @endsection
 
-@section('styles')
-<!-- Menggunakan Bootstrap 5 untuk styling -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-@endsection
-
-@section('scripts')
-<!-- Script tambahan jika diperlukan -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-@endsection
