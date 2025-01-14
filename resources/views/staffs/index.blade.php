@@ -19,7 +19,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Nama Staff</th>
-                                    <th scope="col">Sebagai</th>
+                                    <th scope="col">Jabatan</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">No HP</th>
                                     <th scope="col" class="text-center">Aksi</th>
@@ -29,7 +29,7 @@
                                 @foreach ($staffs as $staff)
                                     <tr>
                                         <td>{{ $staff->namaStaff }}</td>
-                                        <td>{{ $staff->sebagai }}</td>
+                                        <td>{{ $staff->idjabatan->namaJabatan ?? 'Tidak ada jabatan' }}</td>
                                         <td>{{ $staff->email }}</td>
                                         <td>{{ $staff->noTlp }}</td>
                                         <td class="text-center">

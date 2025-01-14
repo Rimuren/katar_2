@@ -30,13 +30,17 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-
+                            
                             <div class="form-group">
-                                <label for="sebagai">Sebagai</label>
-                                <input type="text" name="sebagai" id="sebagai" class="form-control" value="{{ old('sebagai') }}" required>
-                                @error('sebagai')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                                <label for="idJabatan">Jabatan</label>
+                                <select name="idJabatan" id="idJabatan" class="form-control" required>
+                                    <option value="" disabled selected>Pilih Jabatan</option>
+                                    @foreach($jabatans as $jab)
+                                        <option value="{{ $jab->id }}" {{ old('idJabatan') == $jab->id ? 'selected' : '' }}>
+                                            {{ $jab->namaJabatan }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">
