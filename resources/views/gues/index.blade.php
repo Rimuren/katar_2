@@ -1,5 +1,7 @@
 @extends('guests.layouts.apperance')  
 
+@section('title', 'Katar')
+
 @section('content')
 <div class="" id="card-color">
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -76,7 +78,7 @@
                 <div class="card">
                     <img src="#" class="card-img-top" alt="Feature 3">
                     <div class="card-body">
-                        <h5 class="card-title">Feature 3</h5> 
+                        <h5 class="card-title">Feature 3</h5>
                         <p class="card-text">This is a short description of Feature 3.</p>
                         <a href="#" class="btn btn-custom" style="color: #007bff;">Explore Feature 3 <i class="fas fa-arrow-right"></i></a>
                     </div>

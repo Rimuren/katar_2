@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MerkController;
@@ -16,9 +18,11 @@ use App\Http\Controllers\PenjualanController;
 use App\Models\Penjualan;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('guests.index');
-}); 
+// tampilan awal sebelum login
+Route::get('/', [HomeController::class, 'guest'])->name('guests.home');
+
+// index,create,store,show,edit,update,destroy
+Route::get('/home', [HomeController::class, 'user'])->name('user.home');
 
 // dashboard
 Route::resource('dashboard', DashboardController::class);
@@ -59,4 +63,8 @@ Route::resource('opnames',OpnameController::class);
 // CRUD penjualan
 Route::resource('penjualans',PenjualanController::class);
 
-
+// LOGIN
+Route::get('guest/login/daftar', [LoginController::class, 'Daftar'])->name('guests.daftar');
+Route::get('guest/login/masuk', [LoginController::class, 'Masuk'])->name('guests.masuk');
+Route::post('guest/login/daftar', [LoginController::class, 'submitDaftar'])->name('guests.daftar.submit');
+Route::post('guest/login/masuk', [LoginController::class, 'submitMasuk'])->name('guests.masuk.submit');

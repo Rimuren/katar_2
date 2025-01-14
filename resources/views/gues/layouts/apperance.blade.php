@@ -234,25 +234,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Mendapatkan elemen dan status tema
-        const themeToggleButton = document.getElementById('themeToggle');
+        const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
-    
-        // Memeriksa preferensi tema dari localStorage saat halaman dimuat
-        if (localStorage.getItem('dark-mode') === 'enabled') {
-            body.classList.add('dark-mode'); // Aktifkan tema gelap jika diset di localStorage
-        }
-    
-        // Fungsi untuk toggle tema dan simpan preferensi di localStorage
-        themeToggleButton.addEventListener('click', function () {
+
+        themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
-            
-            // Simpan status tema ke localStorage
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('dark-mode', 'enabled');
-            } else {
-                localStorage.setItem('dark-mode', 'disabled');
-            }
+            themeToggle.innerHTML = body.classList.contains('dark-mode')
+                ? '<i class="fas fa-sun"></i>'
+                : '<i class="fas fa-moon"></i>';
         });
     </script>
 </body>
