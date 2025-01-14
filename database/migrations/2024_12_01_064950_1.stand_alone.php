@@ -15,17 +15,16 @@ return new class extends Migration
         Schema::create('pelanggan', function (Blueprint $table) {
             $table->id();
             $table->string('namaPelanggan');
-            $table->integer('noTlp')->unique();
+            $table->string('noTlp')->unique();
             $table->string('email')->unique();
-            $table->integer('jumlahPoin');
             $table->timestamps();
         });
-
+        
         // Tabel Supplier
         Schema::create('supplier', function (Blueprint $table) {
             $table->id();
             $table->string('namaSupplier');
-            $table->integer('noTlp')->unique();
+            $table->string('noTlp')->unique();
             $table->string('email')->unique();
             $table->timestamps();
         });
@@ -46,15 +45,7 @@ return new class extends Migration
         Schema::create('kategori', function (Blueprint $table) {
             $table->id();
             $table->string('namaKategori');
-        });
-
-        // Tabel Poin
-        Schema::create('poin', function (Blueprint $table) {
-            $table->id();
-            $table->integer('min_range');
-            $table->integer('max_range');
-            $table->integer('poin');
-        });
+        });     
     }
 
     /**
@@ -66,7 +57,10 @@ return new class extends Migration
         Schema::dropIfExists('supplier');
         Schema::dropIfExists('merk');
         Schema::dropIfExists('kategori');
+<<<<<<< HEAD
         Schema::dropIfExists('jabatan');
         Schema::dropIfExists('poin');
+=======
+>>>>>>> 2b938c89418aca66050c5faa2af7eeebc53aa142
     }
 };

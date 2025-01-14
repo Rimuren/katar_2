@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.apperance')  
 
 @section('title', 'Tambah Barang')  
 
@@ -13,7 +13,6 @@
                     <div class="card-body">
                         <form action="{{ route('barangs.store') }}" method="POST">
                             @csrf
-                            <!-- Nama Barang -->
                             <div class="form-group">
                                 <label for="namaBarang">Nama Barang</label>
                                 <input type="text" name="namaBarang" id="namaBarang" class="form-control" placeholder="Masukkan nama barang" required>
@@ -22,7 +21,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Kategori -->
                             <div class="form-group">
                                 <label for="idkategori">Kategori</label>
                                 <select name="idkategori" id="idkategori" class="form-control" required>
@@ -36,7 +34,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Merk -->
                             <div class="form-group">
                                 <label for="idmerk">Merk</label>
                                 <select name="idmerk" id="idmerk" class="form-control" required>
@@ -50,7 +47,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Stok -->
                             <div class="form-group">
                                 <label for="stok">Stok</label>
                                 <input type="number" name="stok" id="stok" class="form-control" placeholder="Masukkan jumlah stok" required>
@@ -59,7 +55,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Harga Beli -->
                             <div class="form-group">
                                 <label for="hargaBeli">Harga Beli</label>
                                 <input type="number" name="hargaBeli" id="hargaBeli" class="form-control" placeholder="Masukkan harga beli" required>
@@ -68,7 +63,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Harga Jual -->
                             <div class="form-group">
                                 <label for="hargaJual">Harga Jual</label>
                                 <input type="number" name="hargaJual" id="hargaJual" class="form-control" placeholder="Masukkan harga jual" required>
@@ -77,10 +71,9 @@
                                 @enderror
                             </div>
 
-                            <!-- Tombol -->
                             <div class="form-group text-right">
-                                <a href="{{ route('barangs.index') }}" class="btn btn-secondary">Batal</a>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="submit" class="btn btn-primary mt-3 mr-1">Simpan</button>
+                                <a href="{{ route('barangs.index') }}" class="btn btn-secondary mt-3">Batal</a>
                             </div>
                         </form>
                     </div>

@@ -11,18 +11,31 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        // Tabel Poin
+        Schema::create('poin', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('idPelanggan');
+            $table->integer('min_harga');
+            $table->integer('max_harga');
+            $table->integer('poin');
+            $table->timestamps();
+
+            $table->foreign('idPelanggan')->references('id')->on('pelanggan')->onDelete('cascade');
+        });
+
         // Tabel barang
         Schema::create('barang', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idmerk');
             $table->unsignedBigInteger('idkategori');
             $table->string('namaBarang');
-            $table->integer('stok');
+            $table->integer('stok')->nullable();
             $table->decimal('hargaBeli', 15, 2);
             $table->decimal('hargaJual', 15, 2);
 
-            $table->foreign('idmerk')->references('id')->on('merk');
-            $table->foreign('idkategori')->references('id')->on('kategori');
+            $table->foreign('idmerk')->references('id')->on('merk')->onDelete('cascade');
+            $table->foreign('idkategori')->references('id')->on('kategori')->onDelete('cascade');
         });
 
         // Tabel Staff
@@ -42,21 +55,22 @@ return new class extends Migration
             $table->unsignedBigInteger('idbarang');
             $table->unsignedBigInteger('idstaff');
             $table->date('tglOpname');
-            $table->integer('stokFisik');
-            $table->integer('stokSistem');
+            $table->integer('stokFisik')->nullable();
+            $table->integer('stokSistem')->nullable();
             $table->integer('selisih')->nullable();
 
-            $table->foreign('idbarang')->references('id')->on('barang');
-            $table->foreign('idstaff')->references('id')->on('staff');
+            $table->foreign('idbarang')->references('id')->on('barang')->onDelete('cascade');
+            $table->foreign('idstaff')->references('id')->on('staff')->onDelete('cascade');
         });
 
         // Tabel shop
         Schema::create('shop', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idbarang');
-            $table->integer('poinRequired');
+            $table->integer('jumlahPoin')->nullable();
+            $table->string('image')->nullable();
 
-            $table->foreign('idbarang')->references('id')->on('barang');
+            $table->foreign('idbarang')->references('id')->on('barang')->onDelete('cascade');
         });
 
         // Tabel shift
@@ -66,33 +80,31 @@ return new class extends Migration
             $table->time('jamKerja');
             $table->time('jamPulang');
 
-            $table->foreign('idstaff')->references('id')->on('staff');
+            $table->foreign('idstaff')->references('id')->on('staff')->onDelete('cascade');
         });
 
         // Tabel cash_Drawer
         Schema::create('cash_drawer', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idstaff');
-            $table->date('tglBuka');
-            $table->date('tglTutup');
+            $table->unsignedBigInteger('idshift');
+            $table->time('jamBuka');
+            $table->time('jamTutup');
             $table->integer('saldoAwal');
-            $table->integer('saldoAkhir');
-
-            $table->foreign('idstaff')->references('id')->on('staff');
+            $table->integer('saldoAkhir')->nullable();
+            $table->foreign('idshift')->references('id')->on('shift')->onDelete('cascade');
         });
-
+        
         // Tabel transaksi
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idPelanggan');
             $table->unsignedBigInteger('idStaff');
-            $table->string('namaTransaksi');
+            $table->string('namaTransaksi')->nullable();
             $table->date('tglTransaksi');
             $table->integer('totalTransaksi');
             $table->enum('tipeTransaksi', ['beli', 'tukar']);
-
-            $table->foreign('idPelanggan')->references('id')->on('pelanggan');
-            $table->foreign('idStaff')->references('id')->on('staff');
+            $table->foreign('idPelanggan')->references('id')->on('pelanggan')->onDelete('cascade');
+            $table->foreign('idStaff')->references('id')->on('staff')->onDelete('cascade');
         });
 
         // Tabel pembelian
@@ -104,9 +116,9 @@ return new class extends Migration
             $table->integer('quantity');
             $table->date('tglPembelian');
 
-            $table->foreign('idtransaksi')->references('id')->on('transaksi');
-            $table->foreign('idbarang')->references('id')->on('barang');
-            $table->foreign('idsupplier')->references('id')->on('supplier');
+            $table->foreign('idtransaksi')->references('id')->on('transaksi')->onDelete('cascade');
+            $table->foreign('idbarang')->references('id')->on('barang')->onDelete('cascade');
+            $table->foreign('idsupplier')->references('id')->on('supplier')->onDelete('cascade');
         });
 
         // Tabel penukaran
@@ -118,9 +130,9 @@ return new class extends Migration
             $table->integer('pointUsed');
             $table->date('tglRedeem');
 
-            $table->foreign('idtransaksi')->references('id')->on('transaksi');
-            $table->foreign('idpelanggan')->references('id')->on('pelanggan');
-            $table->foreign('idshop')->references('id')->on('shop');
+            $table->foreign('idtransaksi')->references('id')->on('transaksi')->onDelete('cascade');
+            $table->foreign('idpelanggan')->references('id')->on('pelanggan')->onDelete('cascade');
+            $table->foreign('idshop')->references('id')->on('shop')->onDelete('cascade');
         });
 
         // Tabel penjualan
@@ -129,10 +141,11 @@ return new class extends Migration
             $table->unsignedBigInteger('idtransaksi');
             $table->unsignedBigInteger('idbarang');
             $table->integer('quantity');
+            $table->decimal('totalHarga', 10, 2);
             $table->date('tglPenjualan');
 
-            $table->foreign('idtransaksi')->references('id')->on('transaksi');
-            $table->foreign('idbarang')->references('id')->on('barang');
+            $table->foreign('idtransaksi')->references('id')->on('transaksi')->onDelete('cascade');
+            $table->foreign('idbarang')->references('id')->on('barang')->onDelete('cascade');
         });
         
 
@@ -143,6 +156,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('poin');
         Schema::dropIfExists('barang');
         Schema::dropIfExists('opname');
         Schema::dropIfExists('shop');

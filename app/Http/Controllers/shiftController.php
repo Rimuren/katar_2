@@ -10,61 +10,38 @@ class ShiftController extends Controller
 {
     public function index()
     {
-        // Mengambil shift dengan relasi staff
-        $shifts = Shift::with('staff')->get(); 
+        $shifts = Shift::getAllShifts();
         return view('shifts.index', compact('shifts'));
     }
 
-    // Form Shift
     public function create()
     {
-        $staffs = Staff::all(); 
+        $staffs = Staff::all();
         return view('shifts.create', compact('staffs'));
     }
 
-    // Simpan
     public function store(Request $request)
     {
-        $request->validate([
-            'idstaff' => 'required|exists:staff,id',
-            'jamKerja' => 'required|date_format:H:i',
-            'jamPulang' => 'required|date_format:H:i|after:jamKerja',
-        ]);
-
-        Shift::create($request->all());
-
-        return redirect()->route('shifts.index')->with('success', 'Shift berhasil ditambahkan');
+        $result = Shift::storeShift($request);
+        return redirect()->route('shifts.index')->with($result['status'], $result['message']);
     }
 
-    // Edit
     public function edit($id)
     {
-        $shift = Shift::findOrFail($id); 
-        $staffs = Staff::all(); 
-        return view('shifts.edit', compact('shifts', 'staffs'));
+        $shift = Shift::getShift($id);
+        $staffs = Staff::all();
+        return view('shifts.edit', compact('shift', 'staffs'));
     }
 
-    // Update
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'idstaff' => 'required|exists:staff,id',
-            'jamKerja' => 'required|date_format:H:i',
-            'jamPulang' => 'required|date_format:H:i|after:jamKerja',
-        ]);
-
-        $shift = Shift::findOrFail($id);
-        $shift->update($request->all());
-
-        return redirect()->route('shifts.index')->with('success', 'Shift berhasil diubah');
+        $result = Shift::updateShift($request, $id);
+        return redirect()->route('shifts.index')->with($result['status'], $result['message']);
     }
 
-    // Hapus
     public function destroy($id)
     {
-        $shift = Shift::findOrFail($id);
-        $shift->delete();
-
-        return redirect()->route('shifts.index')->with('success', 'Shift berhasil dihapus');
+        $result = Shift::deleteShift($id);
+        return redirect()->route('shifts.index')->with($result['status'], $result['message']);
     }
 }

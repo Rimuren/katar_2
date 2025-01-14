@@ -4,39 +4,80 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 
-class transaksi extends Model
+class Transaksi extends Model
 {
     use HasFactory;
 
     protected $table = 'transaksi';
-
+    public $timestamps = false;
+    
     protected $fillable = [
-        'idPelanggan', 'idStaff', 'namaTransaksi', 'tglTransaksi', 'totalTransaksi', 'tipeTransaksi'
+        'idPelanggan',
+        'idStaff',
+        'namaTransaksi',
+        'tglTransaksi',
+        'totalTransaksi',
+        'tipeTransaksi',
     ];
 
     public function pelanggan()
     {
-        return $this->belongsTo(pelanggan::class, 'idPelanggan');
+        return $this->belongsTo(Pelanggan::class, 'idPelanggan');
     }
 
     public function staff()
     {
-        return $this->belongsTo(staff::class, 'idStaff');
+        return $this->belongsTo(Staff::class, 'idStaff');
     }
 
-    public function pembelian()
+    private static function validateData($data)
     {
-        return $this->hasMany(pembelian::class);
+        $validator = Validator::make($data, [
+            'idPelanggan' => 'required|exists:pelanggan,id',
+            'idStaff' => 'required|exists:staff,id',
+            'namaTransaksi' => 'string|max:255',
+            'tglTransaksi' => 'required|date',
+            'totalTransaksi' => 'required|integer|min:0',
+            'tipeTransaksi' => 'required|in:beli,tukar',
+        ]);
+
+        if ($validator->fails()) {
+            return ['errors' => $validator->errors()];
+        }
+
+        return [];
     }
 
-    public function penukaran()
+    public static function createTransaksi($data)
     {
-        return $this->hasMany(penukaran::class);
+        $validationResult = self::validateData($data);
+        if (!empty($validationResult)) {
+            return $validationResult;
+        }
+
+        self::create($data);
+        return redirect()->route('transaksis.index')->with('success', 'Transaksi berhasil Ditambahkan!');
     }
 
-    public function penjualan()
+    public static function updateTransaksi($id, $data)
     {
-        return $this->hasMany(penjualan::class);
+        $validationResult = self::validateData($data);
+        if (!empty($validationResult)) {
+            return $validationResult;
+        }
+
+        $transaksi = self::findOrFail($id);
+        $transaksi->update($data);
+        return redirect()->route('transaksis.index')->with('success', 'Transaksi berhasil Perbarui!');
+    }
+
+    public static function destroyTransaksi($id)
+    {
+        $transaksi = self::findOrFail($id);
+        $transaksi->delete();
+
+        return redirect()->route('transaksis.index')->with('success', 'Transaksi berhasil dihapus!');
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.apperance')   
 
 @section('title', 'Data Barang')  
 
@@ -12,7 +12,9 @@
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('barangs.create') }}" class="btn btn-md btn-success mb-3">Tambah Barang</a>
+                        <a href="{{ route('barangs.create') }}" class="btn btn-md btn-success mb-3">
+                            <i class="fas fa-plus-circle"></i> Tambah Barang
+                        </a>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -22,7 +24,7 @@
                                     <th scope="col">Stok</th>
                                     <th scope="col">Harga Beli</th>
                                     <th scope="col">Harga Jual</th>
-                                    <th scope="col">Aksi</th>
+                                    <th scope="col" class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,12 +36,16 @@
                                         <td>{{ $barang->stok }}</td>
                                         <td>{{ number_format($barang->hargaBeli, 0, ',', '.') }}</td>
                                         <td>{{ number_format($barang->hargaJual, 0, ',', '.') }}</td>
-                                        <td>
-                                            <a href="{{ route('barangs.edit', $barang->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                        <td class="text-center">
+                                            <a href="{{ route('barangs.edit', $barang->id) }}" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
                                             <form action="{{ route('barangs.destroy', $barang->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin?')">Hapus</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin?')">
+                                                    <i class="fas fa-trash"></i> Hapus
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -52,7 +58,7 @@
                                 Tidak ada data barang yang tersedia.
                             </div>
                         @endif
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>
