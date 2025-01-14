@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MerkApiController;
 use App\Http\Controllers\Api\PelangganApiController;
 use App\Http\Controllers\Api\SupplierApiController;
+use App\Http\Controllers\Api\TransaksiApiController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -19,4 +20,5 @@ Route::prefix('v1')->group(function () {
     Route::resource('barangs', BarangApiController::class);
     Route::resource('pelanggans', PelangganApiController::class);
     Route::resource('suppliers', SupplierApiController::class);
+    Route::resource('transaksis', TransaksiApiController::class);
 })->middleware('auth:sanctum');
