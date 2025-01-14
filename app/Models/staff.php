@@ -70,10 +70,11 @@ class Staff extends Model
             ];
         }
 
-        self::create($request->all());
+        $staff = self::create($request->all());
         return [
             'status' => 'success',
-            'message' => 'Staff berhasil ditambahkan.'
+            'message' => 'Staff berhasil ditambahkan.',
+            'data' => $staff
         ];
     }
 
@@ -103,7 +104,8 @@ class Staff extends Model
         $staff->update($request->all());
         return [
             'status' => 'success',
-            'message' => 'Staff berhasil diperbarui.'
+            'message' => 'Staff berhasil diperbarui.',
+            'data' => $staff
         ];
     }
 

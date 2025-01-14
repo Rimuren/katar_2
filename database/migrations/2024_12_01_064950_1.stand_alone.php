@@ -57,5 +57,7 @@ return new class extends Migration
         Schema::dropIfExists('supplier');
         Schema::dropIfExists('merk');
         Schema::dropIfExists('kategori');
+        Schema::dropIfExists('jabatan');
+        Schema::dropIfExists('poin');
     }
 };

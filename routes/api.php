@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Api\BarangApiController;
+use App\Http\Controllers\Api\JabatanApiController;
 use App\Http\Controllers\Api\KategoriApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MerkApiController;
 use App\Http\Controllers\Api\PelangganApiController;
+use App\Http\Controllers\Api\StaffApiController;
 use App\Http\Controllers\Api\SupplierApiController;
 use App\Http\Controllers\Api\TransaksiApiController;
 
@@ -21,4 +23,7 @@ Route::prefix('v1')->group(function () {
     Route::resource('pelanggans', PelangganApiController::class);
     Route::resource('suppliers', SupplierApiController::class);
     Route::resource('transaksis', TransaksiApiController::class);
+    Route::resource('jabatans', JabatanApiController::class);
+    Route::resource('staffs', StaffApiController::class);
+    
 })->middleware('auth:sanctum');

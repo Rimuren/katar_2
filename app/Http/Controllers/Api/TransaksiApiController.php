@@ -27,7 +27,7 @@ class TransaksiApiController extends Controller
         $data = $request->all();
 
         // Panggil metode createTransaksi dari model Transaksi
-        $result = Transaksi::createTransaksi($data);
+        $result = Transaksi::createTransaksiApi($data);
 
         // Jika ada error dalam validasi
         if (isset($result['errors'])) {
@@ -35,7 +35,7 @@ class TransaksiApiController extends Controller
         }
 
         // Jika berhasil
-        return response()->json(new TransaksiResource($result), 201);
+        return response()->json(new TransaksiResource($result['data']), 201);
     }
 
     /**
@@ -64,7 +64,7 @@ class TransaksiApiController extends Controller
         $data = $request->all();
 
         // Panggil metode updateTransaksi dari model Transaksi
-        $result = Transaksi::updateTransaksi($id, $data);
+        $result = Transaksi::updateTransaksiApi($id, $data);
 
         // Jika ada error dalam validasi
         if (isset($result['errors'])) {
@@ -72,7 +72,7 @@ class TransaksiApiController extends Controller
         }
 
         // Jika berhasil
-        return new TransaksiResource($result);
+        return new TransaksiResource($result['data']);
     }
 
     /**
@@ -89,7 +89,7 @@ class TransaksiApiController extends Controller
         }
 
         // Hapus transaksi
-        Transaksi::destroyTransaksi($id);
+        Transaksi::deleteTransaksiApi($id);
 
         // Kembalikan respons sukses
         return response()->json(['message' => 'Transaksi berhasil dihapus.']);
