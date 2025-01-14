@@ -2,74 +2,77 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\staff;
+use App\Models\Staff;
+use App\Models\Jabatan;
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
 {
-    // Menampilkan staff
+    // Menampilkan semua staff
     public function index()
     {
-        $staffs = staff::all(); 
-        return view('staffs.index', compact('staffs')); 
+        $staffs = Staff::with('jabatan')->get(); // Mengambil data staff beserta relasi jabatan
+        return view('staffs.index', compact('staffs'));
     }
 
-    // Menampilkan form staff
+    // Menampilkan form tambah staff
     public function create()
     {
-        return view('staffs.create'); 
+        $jabatans = Jabatan::all(); // Mengambil semua data jabatan untuk dropdown
+        return view('staffs.create', compact('jabatans'));
     }
 
-    // Simpan
+    // Menyimpan data staff baru
     public function store(Request $request)
     {
         $request->validate([
             'namaStaff' => 'required|string|max:255',
-            'sebagai' => 'required|string|max:255',
+            'idJabatan' => 'required|exists:jabatan,id',
             'email' => 'required|email|unique:staff,email',
             'noTlp' => 'required|string|max:12|unique:staff,noTlp',
         ]);
 
-        staff::create($request->all());
+        Staff::create($request->only(['namaStaff', 'idJabatan', 'email', 'noTlp']));
 
         return redirect()->route('staffs.index')->with('success', 'Staff berhasil ditambahkan.');
     }
 
-    // Menampilkan id
+    // Menampilkan detail staff berdasarkan ID
     public function show($id)
     {
-        $staff = staff::findOrFail($id); 
+        $staff = Staff::with('jabatan')->findOrFail($id);
         return view('staffs.show', compact('staff'));
     }
 
-    // Edit
+    // Menampilkan form edit staff
     public function edit($id)
     {
-        $staff = staff::findOrFail($id); 
-        return view('staffs.edit', compact('staff')); 
+        $staff = Staff::findOrFail($id);
+        $jabatans = Jabatan::all(); // Mengambil data jabatan untuk dropdown
+        return view('staffs.edit', compact('staff', 'jabatans'));
     }
 
-    // Update
+    // Mengupdate data staff
     public function update(Request $request, $id)
     {
         $request->validate([
             'namaStaff' => 'required|string|max:255',
-            'sebagai' => 'required|string|max:255',
+            'idJabatan' => 'required|exists:jabatan,id',
             'email' => 'required|email|unique:staff,email,' . $id,
             'noTlp' => 'required|string|max:12|unique:staff,noTlp,' . $id,
         ]);
 
-        $staff = staff::findOrFail($id); 
-        $staff->update($request->all());
+        $staff = Staff::findOrFail($id);
+        $staff->update($request->only(['namaStaff', 'idJabatan', 'email', 'noTlp']));
 
         return redirect()->route('staffs.index')->with('success', 'Staff berhasil diperbarui.');
     }
 
-        // Hapus
+    // Menghapus data staff
     public function destroy($id)
     {
-        $staff = staff::findOrFail($id); 
-        $staff->delete(); 
+        $staff = Staff::findOrFail($id);
+        $staff->delete();
 
         return redirect()->route('staffs.index')->with('success', 'Staff berhasil dihapus.');
     }

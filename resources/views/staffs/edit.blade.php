@@ -1,40 +1,72 @@
 @extends('layouts.app')
 
+@section('title', 'Edit Staff')
+
 @section('content')
-<div class="container">
-    <h1>Edit Staff</h1>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card border-0 shadow-sm rounded">
+                <div class="card-header">
+                    <h3>Edit Staff</h3>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('staffs.update', $staff->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+                        <!-- Nama Staff -->
+                        <div class="form-group">
+                            <label for="namaStaff">Nama Staff</label>
+                            <input type="text" name="namaStaff" id="namaStaff" class="form-control" value="{{ old('namaStaff', $staff->namaStaff) }}" required>
+                            @error('namaStaff')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
 
-    <form action="{{ route('staffs.update', $staff->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="mb-3">
-            <label for="namaStaff" class="form-label">Nama Staff</label>
-            <input type="text" name="namaStaff" id="namaStaff" class="form-control" value="{{ $staff->namaStaff }}" required>
+                        <!-- Jabatan -->
+                        <div class="form-group">
+                            <label for="idJabatan">Jabatan</label>
+                            <select name="idJabatan" id="idJabatan" class="form-control" required>
+                                <option value="" disabled>Pilih Jabatan</option>
+                                @foreach ($jabatans as $jabatan)
+                                    <option value="{{ $jabatan->id }}" {{ $jabatan->id == $staff->idJabatan ? 'selected' : '' }}>
+                                        {{ $jabatan->namaJabatan }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('idJabatan')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $staff->email) }}" required>
+                            @error('email')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <!-- Nomor Telepon -->
+                        <div class="form-group">
+                            <label for="noTlp">Nomor Telepon</label>
+                            <input type="text" name="noTlp" id="noTlp" class="form-control" value="{{ old('noTlp', $staff->noTlp) }}" required>
+                            @error('noTlp')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <!-- Tombol -->
+                        <div class="form-group text-right">
+                            <a href="{{ route('staffs.index') }}" class="btn btn-secondary">Batal</a>
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="sebagai" class="form-label">Sebagai</label>
-            <input type="text" name="sebagai" id="sebagai" class="form-control" value="{{ $staff->sebagai }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control" value="{{ $staff->email }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="noTlp" class="form-label">No Telepon</label>
-            <input type="text" name="noTlp" id="noTlp" class="form-control" value="{{ $staff->noTlp }}" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Perbarui</button>
-        <a href="{{ route('staffs.index') }}" class="btn btn-secondary">Batal</a>
-    </form>
+    </div>
 </div>
 @endsection

@@ -13,7 +13,7 @@ class staff extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'namaStaff', 'sebagai', 'email', 'noTlp'
+        'namaStaff', 'idJabatan', 'email', 'noTlp'
     ];
 
     public function transaksi()
@@ -34,5 +34,10 @@ class staff extends Model
     public function opname()
     {
         return $this->hasMany(opname::class);
+    }
+
+    public function jabatan()
+    {
+        return $this->belongsTo(jabatan::class, 'idJabatan');
     }
 }

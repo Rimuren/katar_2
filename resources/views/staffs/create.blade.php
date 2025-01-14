@@ -1,39 +1,69 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 
-@section('content')
-<div class="container">
-    <h1>Tambah Staff</h1>
+@section('title', 'Tambah Staff')  
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+@section('content')  
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card border-0 shadow-sm rounded">
+                    <div class="card-header">
+                        <h3>Tambah Staff</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('staffs.store') }}" method="POST">
+                            @csrf
+                            
+                            <!-- Nama Staff -->
+                            <div class="form-group">
+                                <label for="namaStaff">Nama Staff</label>
+                                <input type="text" name="namaStaff" id="namaStaff" class="form-control" placeholder="Masukkan nama staff" required>
+                                @error('namaStaff')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
 
-    <form action="{{ route('staffs.store') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-            <label for="namaStaff" class="form-label">Nama Staff</label>
-            <input type="text" name="namaStaff" id="namaStaff" class="form-control" value="{{ old('namaStaff') }}" required>
+                            <!-- Jabatan -->
+                            <div class="form-group">
+                                <label for="idJabatan">Jabatan</label>
+                                <select name="idJabatan" id="idJabatan" class="form-control" required>
+                                    <option value="" disabled selected>Pilih Jabatan</option>
+                                    @foreach ($jabatans as $jabatan)
+                                        <option value="{{ $jabatan->id }}">{{ $jabatan->namaJabatan }}</option>
+                                    @endforeach
+                                </select>
+                                @error('idJabatan')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan email staff" required>
+                                @error('email')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <!-- Nomor Telepon -->
+                            <div class="form-group">
+                                <label for="noTlp">Nomor Telepon</label>
+                                <input type="text" name="noTlp" id="noTlp" class="form-control" placeholder="Masukkan nomor telepon staff" required>
+                                @error('noTlp')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <!-- Tombol -->
+                            <div class="form-group text-right">
+                                <a href="{{ route('staffs.index') }}" class="btn btn-secondary">Batal</a>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="sebagai" class="form-label">Sebagai</label>
-            <input type="text" name="sebagai" id="sebagai" class="form-control" value="{{ old('sebagai') }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="noTlp" class="form-label">No Telepon</label>
-            <input type="text" name="noTlp" id="noTlp" class="form-control" value="{{ old('noTlp') }}" required>
-        </div>
-        <button type="submit" class="btn btn-success">Simpan</button>
-        <a href="{{ route('staffs.index') }}" class="btn btn-secondary">Batal</a>
-    </form>
-</div>
-@endsection
+    </div>
+@endsection  

@@ -30,15 +30,11 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Tabel Staff
-        Schema::create('staff', function (Blueprint $table) {
+        // Tabel Jabatan
+        Schema::create('jabatan', function (Blueprint $table) {
             $table->id();
-            $table->string('namaStaff');
-            $table->string('sebagai');
-            $table->string('email')->unique();
-            $table->string('noTlp')->unique();
-            $table->timestamps();
-        });
+            $table->string('namaJabatan');
+        });        
 
         // Tabel Merk
         Schema::create('merk', function (Blueprint $table) {
@@ -68,9 +64,9 @@ return new class extends Migration
     {
         Schema::dropIfExists('pelanggan');
         Schema::dropIfExists('supplier');
-        Schema::dropIfExists('staff');
         Schema::dropIfExists('merk');
         Schema::dropIfExists('kategori');
+        Schema::dropIfExists('jabatan');
         Schema::dropIfExists('poin');
     }
 };

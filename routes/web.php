@@ -6,6 +6,7 @@ use App\Http\Controllers\MerkController;
 use App\Http\Controllers\pelangganController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ShiftController;
+use App\Http\Controllers\jabatanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,7 +32,8 @@ Route::resource('staffs', StaffController::class);
 // CRUD shift
 Route::resource('shifts', ShiftController::class);
 
-
+// CRUD Jabatan
+Route::resource('jabatans', JabatanController::class);
 
 
 
