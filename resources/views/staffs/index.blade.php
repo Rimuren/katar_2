@@ -1,8 +1,8 @@
 @extends('layouts.apperance')
 
-@section('title', 'Data Staff') 
+@section('title', 'Data Staff')  
 
-@section('content')  
+@section('content') 
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">

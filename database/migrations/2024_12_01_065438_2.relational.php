@@ -38,6 +38,17 @@ return new class extends Migration
             $table->foreign('idkategori')->references('id')->on('kategori')->onDelete('cascade');
         });
 
+        // Tabel Staff
+        Schema::create('staff', function (Blueprint $table) {
+            $table->id();
+            $table->string('namaStaff');
+            $table->unsignedBigInteger('idJabatan');
+            $table->string('email')->unique();
+            $table->string('noTlp')->unique();
+            $table->timestamps();
+
+            $table->foreign('idJabatan')->references('id')->on('jabatan');
+        });        
         // Tabel opname
         Schema::create('opname', function (Blueprint $table) {
             $table->id();
@@ -136,6 +147,8 @@ return new class extends Migration
             $table->foreign('idtransaksi')->references('id')->on('transaksi')->onDelete('cascade');
             $table->foreign('idbarang')->references('id')->on('barang')->onDelete('cascade');
         });
+        
+
     }
 
     /**
@@ -153,5 +166,7 @@ return new class extends Migration
         Schema::dropIfExists('pembelian');
         Schema::dropIfExists('penukaran');
         Schema::dropIfExists('penjualan');
+        Schema::dropIfExists('staff');
+
     }
 };

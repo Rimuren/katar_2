@@ -14,7 +14,7 @@ class Staff extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'namaStaff', 'sebagai', 'email', 'noTlp'
+        'namaStaff', 'idJabatan', 'email', 'noTlp'
     ];
 
     public function transaksi()
@@ -46,7 +46,7 @@ class Staff extends Model
     {
         $validator = Validator::make($request->all(), [
             'namaStaff' => 'required|string|max:255',
-            'sebagai' => 'required|string|max:255',
+            'idjabatan' => 'required|exists:jabatan,id',
             'email' => 'required|email|unique:staff,email',
             'noTlp' => 'required|string|max:12|unique:staff,noTlp',
         ]);
@@ -76,7 +76,7 @@ class Staff extends Model
 
         $validator = Validator::make($request->all(), [
             'namaStaff' => 'required|string|max:255',
-            'sebagai' => 'required|string|max:255',
+            'idjabatan' => 'required|exists:jabatan,id',
             'email' => 'required|email|unique:staff,email,' . $id,
             'noTlp' => 'required|string|max:12|unique:staff,noTlp,' . $id,
         ]);
@@ -103,6 +103,12 @@ class Staff extends Model
         return [
             'status' => 'success',
             'message' => 'Staff berhasil dihapus.'
-        ];
+            ];
     }
+
+    public function jabatan()
+    {
+        return $this->belongsTo(jabatan::class, 'idJabatan');
+    }
+
 }

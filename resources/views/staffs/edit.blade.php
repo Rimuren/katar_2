@@ -2,6 +2,8 @@
 
 @section('title', 'Edit Staff')
 
+@section('title', 'Edit Staff')
+
 @section('content')
     <div class="container mt-5">
         <div class="row">
